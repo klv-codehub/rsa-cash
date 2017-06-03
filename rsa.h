@@ -1,6 +1,6 @@
 #ifndef RSA_H
 #define RSA_H
-
+//commit
 struct public_key{
     N n;	// Модуль
     N e;	// Открытая экспонента
