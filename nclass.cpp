@@ -183,6 +183,7 @@ void N::divN(N b)
         return;
     }
     if (b.chk0()) {
+        puts("Деление на 0: операция не определена. Возврат исходного значения . . .");
         return;
     }
     int k = a.digit.size() - b.digit.size();
@@ -212,6 +213,7 @@ void N::divN(N b)
 
 N operator % (N& a, N& b)
 {
+
     N tmp = a;
     //for (int i = 0; i < tmp.digit.size() ; i++) {
       //  printf("tmp[%d] = %d\n", i,tmp.digit[i]);
@@ -221,11 +223,11 @@ N operator % (N& a, N& b)
       //  printf("tmp[%d] = %d\n", i,tmp.digit[i]);
     //}
     tmp.mulN(b);
-    tmp = a - tmp;
+    //tmp = a - tmp;
 
     //a = a - tmp;
 
-    return tmp;
+    return a - tmp;
 }
 
 string N::to_binstr()
@@ -243,39 +245,26 @@ string N::to_binstr()
     }
     return nstr;
 }
-/*
+
 void N::powmod(N pow, N mod)
 {
-    N odd("2"), tmpNull("0"), tmp = pow;
+    N odd("2"), tmpOne("1"), tmpThis = *this;
 
-    for (int i = 0; i < pow.to_binstr().length(); i++) {
-        if (pow.to_binstr()[i] == '0')
-
-
-
+    if (pow == tmpOne) {
+        (*this) = (*this) % mod;
+        return;
+    }
+    string powStr = pow.to_binstr();
+    for (int i = 1; i < powStr.length(); i++) {
+        this->mulN(*this);
+        if (powStr[i] == '1') {
+            this->mulN(tmpThis);
+        }
+        (*this) = (*this) % mod;
     }
 }
-*/
-/*
- * N tmp = b;
-        tmp.mul10k(k);
 
 
-        for (int j = 0; j < tmp.digit.size() ;j++) {
-            printf("%d - tmp[%d] = %d\n", i,j,tmp.digit[j]);
-        }
-
-
-        if (a < tmp) {
-            puts("RF");
-            result.digit.push_back(0);
-            i++;
-            N tmp = b;
-            tmp.mul10k(--k);
-        }
-        a = a - tmp;
-        result.digit[i]++;
- * */
 void N::mulK(int k)
 {
     N tmpNull("0");
@@ -313,30 +302,6 @@ void N::mulN(N b)
     *this = result;
 }
 
-/*
-N operator / (N& a, N& b)
-{
-    N bigger = (a.digit.size() < b.digit.size())?b:a;
-    N smaller = (a.digit.size() < b.digit.size())?a:b;
-    N result;
-    int k = bigger.digit.size() - smaller.digit.size();
-    if ((bigger - smaller.mulK(k)) <= 0) {
-        k--;
-    }
-    N tmp("0");
-    N del("0");
-    for (int n = 0; k >= 0; k--, n++) {
-        del.digit.emplace(a.digit.begin(), 0);
-        for (int i = 0; (tmp = bigger - smaller.mulK(k) >= 0; i++)
-            del.digit[n] = i;
-    }
-
-    return result;
-}
-*/
-//N operator % (N& a, N& b) {
-//
-//}
 
 //=======================================================================================
 //string N::to_binstr();
