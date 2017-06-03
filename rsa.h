@@ -1,6 +1,6 @@
 #ifndef RSA_H
 #define RSA_H
-//commit
+
 struct public_key{
     N n;	// Модуль
     N e;	// Открытая экспонента
@@ -24,4 +24,4 @@ N rsa_signify(private_key& key)	;
 N rsa_verify(public_key& key);
 N rsa_blind(public_key& key, N& r);
 
-#endif // RSA_HSD
+#endif // RSA_H
