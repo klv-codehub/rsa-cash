@@ -24,4 +24,4 @@ N rsa_signify(private_key& key)	;
 N rsa_verify(public_key& key);
 N rsa_blind(public_key& key, N& r);
 
-#endif // RSA_H
+#endif // RSA_HSD
