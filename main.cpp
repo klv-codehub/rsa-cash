@@ -8,12 +8,13 @@ int main()
 
     //  трабла с нулями!! С НУЛЯМИ НЕЗНАЧАЩИМИ
 
-    N a("38");
+    N a("19");
     N b("2");
 
-    a.divN(b);
+    //a.divN(b);
+    //string vadim = a.to_binstr();
 
-    cout << a.to_binstr() << endl;
+    cout << endl << a.to_binstr() << endl;
     //N c = a - b;
     //cout << "1-[" << a.to_str() << endl;
 

@@ -221,29 +221,23 @@ N operator % (N& a, N& b)
       //  printf("tmp[%d] = %d\n", i,tmp.digit[i]);
     //}
     tmp.mulN(b);
-    //for (int i = 0; i < tmp.digit.size() ; i++) {
-      //  printf("tmp[%d] = %d\n", i,tmp.digit[i]);
-    //}
-    a = a - tmp;
-    //!!!
-    return a;
+    tmp = a - tmp;
+
+    //a = a - tmp;
+
+    return tmp;
 }
 
 string N::to_binstr()
 {
     string t, nstr;
-    N odd("2"), tmp = *this;
-
+    N odd("2"), tmp = *this, ntmp;
     while (tmp > odd || tmp == odd) {
-        N ntmp = tmp % odd;
-
-        t += ntmp.digit[0];
-
+        ntmp = (tmp % odd);
+        t += ntmp.digit[0] + '0';
         tmp.divN(odd);
-
     }
-    t += tmp.digit[0];
-
+    t += tmp.digit[0] + '0';
     for (int i = t.length() - 1; i >= 0; i--) {
         nstr += t[i];
     }
@@ -252,13 +246,10 @@ string N::to_binstr()
 /*
 void N::powmod(N pow, N mod)
 {
-    N odd("2");
-    N tmpNull("0");
-    for (int k = 0; k < pow; ) {
-        while (pow % odd == tmpNull) {
-            pow.divN(odd);
-            this->mulN(*this);
-        }
+    N odd("2"), tmpNull("0"), tmp = pow;
+
+    for (int i = 0; i < pow.to_binstr().length(); i++) {
+        if (pow.to_binstr()[i] == '0')
 
 
 
