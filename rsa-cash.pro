@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES +=  main.cpp \
         mainwindow.cpp \
         nclass.cpp \
-        rsa.cpp
+        rsa.cpp \
+    debug.cpp
 
 HEADERS  += mainwindow.h \
         nclass.h \
         common.h \
-        rsa.h
+        rsa.h \
+    debug.h
 
 FORMS    += mainwindow.ui

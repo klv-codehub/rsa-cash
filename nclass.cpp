@@ -1,7 +1,6 @@
 #include "common.h"
 #include "nclass.h"
-#include <iostream>
-#include <algorithm>
+#include "mainwindow.h"
 
 N::N()
 {
@@ -283,6 +282,7 @@ N operator % (N& a, N& b)
 //Метод класса N: перевод в двоичную строку
 string N::to_binstr()
 {
+    dprint("BINSTR started\n");
     string t, nstr;
     N odd("2"), tmp = *this, ntmp;
     while (tmp > odd || tmp == odd) {
@@ -297,6 +297,7 @@ string N::to_binstr()
     for (int i = t.length() - 1; i >= 0; i--) {
         nstr += t[i];
     }
+    dprint("BINSTR ended\n");
     return nstr;
 }
 
@@ -318,6 +319,7 @@ N N::powmod(N pow, N mod)
      */
     string powStr = pow.to_binstr();
     for (int i = 1; i < powStr.length(); i++) {
+        dprint(std::to_string(i) + "\n");
         res.mulN(res);
         if (powStr[i] == '1') {
             res.mulN(*this);

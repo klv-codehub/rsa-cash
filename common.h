@@ -9,4 +9,6 @@ using namespace std;
 
 typedef 	vector	<unsigned char> 	byte_vector;
 
+#include "debug.h"
+
 #endif // COMMON_H
