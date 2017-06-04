@@ -304,6 +304,7 @@ string N::to_binstr()
 //Метод класса N: возведение в степень по модулю
 N N::powmod(N pow, N mod)
 {
+    dprint("POTOK VADIMA\n");
     N tmpOne("1"), res = *this;
     /*
      * Если степень равна 1, то производится деление по модулю и метод завершает своб работу
@@ -317,7 +318,9 @@ N N::powmod(N pow, N mod)
      * Каждый шаг возведения сопровождается делением по модулю, для того
      * чтобы уменьшить длительность операции возведения
      */
+    dprint("VTOROI POTOK VADIM!!!!\n");
     string powStr = pow.to_binstr();
+    dprint("333 POTOK VADIM!!!!\n");
     for (int i = 1; i < powStr.length(); i++) {
         dprint(std::to_string(i) + "\n");
         res.mulN(res);
