@@ -15,10 +15,10 @@ class N
         N powmod(N pow, N mod);
 
         void mul10k(int k);
-        void divN(N b);
+        //void divN(N b);
         bool chk0();
         void mulK(int k);
-        void mulN(N b);
+        //void mulN(N b);
 
         friend N operator + (N& a, N& b);
 
@@ -29,6 +29,7 @@ class N
         friend N operator - (N& a, N& b);
         friend N operator / (N& a, N& b);
         friend N operator % (N& a, N& b);
+        friend N operator * (N& a, N& b);
 };
 
 #endif // NCLASS_H

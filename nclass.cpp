@@ -175,22 +175,6 @@ N operator - (N& a, N& b)
     return result;
 }
 
-
-
-//Метод класса N: проверка на 0
-/*
-bool N::chk0()
-{
-    /*
-     * Если число равно 0, возвращает true, иначе возвращает false
-     *//*
-    N tmp("0");
-    if (*this == tmp) return true;
-    else return false;
-}
-*/
-
-
 //Метод класса N: умножение на 10 в степени k
 void N::mul10k (int k)
 {
@@ -209,66 +193,9 @@ void N::mul10k (int k)
     }
 }
 
-//Метод класса N: деление на натуральное длинное число
-void N::divN(N b)
-{
-    N tmpNull("0");
-    N a = *this, result;
-    /*
-     * Если делитель равен 0, то возвращает исходное число
-     */
-    if (b == tmpNull) {
-        puts("Деление на 0: операция не определена. Возврат исходного значения . . .");
-        return;
-    }
-    /*
-     * k - разность в кол-вах цифр между делимым и делителем
-     * Если отрицательна, то возвращается 0
-     */
-    int k = a.digit.size() - b.digit.size();
-    if (k < 0) {
-        *this = tmpNull;
-        return;
-    }
-    /*
-     * Результирующее число задается нулями (кол-во цифр в числе определяется как (k + 1) )
-     */
-    for (int j = 0; j < k + 1; j++){
-        result.digit.push_back(0);
-    }
-    /*
-     * Производится деление путем вычитания из исходного числа временной переменной, равной
-     * делителю, умноженному на 10 в степени k.
-     * Если делимое становится меньше переменной, то степень k уменьшается и происходит переход к следующему разряду.
-     * Если делимое становится меньше делителя, цикл завершается
-     */
-    for (int i = result.digit.size() - 1; a > b || a == b; ) {
-        N tmp = b;
-        tmp.mul10k(k);
-        while (a < tmp) {
-            tmp = b;
-            tmp.mul10k(--k);
-            i--;
-        }
-        a = a - tmp;
-        result.digit[i] += 1;
-    }
-    /*
-     * Удаление незначащих нулей в результирующем числе
-     */
-    for (int i = result.digit.size() - 1; i > 0; i--) {
-        if (result.digit[i] != 0) break;
-        else result.digit.erase(result.digit.end() - 1);
-    }
-    /*
-     * Возвращает результирующее число
-     */
-    *this = result;
-}
-
+//Оператор "/"
 N operator / (N& a, N& b)
 {
-    string al = "\n";
     N tmpNull("0");
     if (a == tmpNull) return tmpNull;
     if (b == tmpNull) throw;
@@ -278,7 +205,7 @@ N operator / (N& a, N& b)
     int i;
     for (i = a.digit.size() - 2; tmp < b && i >= 0; i--) {
         tmp.digit.insert(tmp.digit.begin(), a.digit[i]);
-    } //i++;
+    }
     for (int j = 0; j < k; j++) {
         result.digit.insert(result.digit.begin(), 0);
         while (tmp > b || tmp == b) {
@@ -302,7 +229,7 @@ N operator % (N& a, N& b)
      */
     N tmp = a;
     tmp = tmp / b;
-    tmp.mulN(b);
+    tmp = tmp * b;
     return a - tmp;
 }
 
@@ -315,7 +242,7 @@ string N::to_binstr()
     while (tmp > odd || tmp == odd) {
         ntmp = (tmp % odd);
         t += ntmp.digit[0] + '0';
-        tmp.divN(odd);
+        tmp = tmp / odd;
     }
     t += tmp.digit[0] + '0';
     /*
@@ -350,9 +277,10 @@ N N::powmod(N pow, N mod)
     dprint("333 POTOK VADIM!!!!\n");
     for (int i = 1; i < powStr.length(); i++) {
         dprint(std::to_string(i) + "\n");
-        res.mulN(res);
+        //res.mulN(res);
+        res = res * res;
         if (powStr[i] == '1') {
-            res.mulN(*this);
+            res = res *(*this);
         }
         res = res % mod;
     }
@@ -382,11 +310,12 @@ void N::mulK(int k)
      }
 }
 
-void N::mulN(N b)
+//Оператор "*"
+N operator * (N& a, N& b)
 {
     N result;
-    N bigger = (this->digit.size() < b.digit.size())?b:(*this);
-    N smaller = (this->digit.size() < b.digit.size())?(*this):b;
+    N bigger = (a.digit.size() < b.digit.size())?b:a;
+    N smaller = (a.digit.size() < b.digit.size())?a:b;
     N tmp = bigger;
     for (int i = 0; i < smaller.digit.size(); i++) {
         tmp.mulK(smaller.digit[i]);
@@ -394,7 +323,7 @@ void N::mulN(N b)
         result = result + tmp;
         tmp = bigger;
     }
-    *this = result;
+    return result;
 }
 
 
