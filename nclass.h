@@ -12,7 +12,7 @@ class N
         string to_binstr();
         byte_vector to_bytevector();
 
-        void powmod(N pow, N mod);
+        N powmod(N pow, N mod);
 
         void mul10k(int k);
         void divN(N b);

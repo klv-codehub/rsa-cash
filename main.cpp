@@ -1,20 +1,13 @@
-#include <iostream>
+#include "mainwindow.h"
+#include <QApplication>
 
-#include "common.h"
-#include "nclass.h"
-
-int main()
+int main(int argc, char *argv[])
 {
-
-
-
-    N a("21");
-    N b("0");
-
-    a.mulK(0);
-    cout <<  a.to_str() << endl;
-    //cout << a.to_str() << endl;
-    //cout << b.to_str() << endl;
-
-    return 0;
+    QApplication app(argc, argv);
+    MainWindow w;
+    w.show();
+//---------------------------------------------------------
+    w.logWrite("Yea! It Works!\n");
+//---------------------------------------------------------
+    return app.exec();
 }

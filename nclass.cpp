@@ -301,15 +301,15 @@ string N::to_binstr()
 }
 
 //Метод класса N: возведение в степень по модулю
-void N::powmod(N pow, N mod)
+N N::powmod(N pow, N mod)
 {
-    N tmpOne("1"), tmpThis = *this;
+    N tmpOne("1"), res = *this;
     /*
      * Если степень равна 1, то производится деление по модулю и метод завершает своб работу
      */
     if (pow == tmpOne) {
-        (*this) = (*this) % mod;
-        return;
+        res = res % mod;
+        return res;
     }
     /*
      * Для возведения числа в степень применяется алгоритм бинарного возведения.
@@ -318,12 +318,13 @@ void N::powmod(N pow, N mod)
      */
     string powStr = pow.to_binstr();
     for (int i = 1; i < powStr.length(); i++) {
-        this->mulN(*this);
+        res.mulN(res);
         if (powStr[i] == '1') {
-            this->mulN(tmpThis);
+            res.mulN(*this);
         }
-        (*this) = (*this) % mod;
+        res = res % mod;
     }
+    return res;
 }
 
 //Метод класса N: умножение на цифру
