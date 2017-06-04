@@ -23,6 +23,10 @@ void MainWindow::on_pushButton_clicked()
     N c("546796543");
     N res = a.powmod(b, c);
     logWrite(QString::fromStdString(a.to_str() + "^" + b.to_str() + " mod " + c.to_str() + " = \n" + res.to_str() + "\n"));
+    //N a("12");
+    //N b("0");
+
+    //logWrite(QString::fromStdString(c.to_str() + "!!!\n"));
 }
 
 void MainWindow::logWrite(QString text)

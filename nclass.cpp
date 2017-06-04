@@ -266,6 +266,33 @@ void N::divN(N b)
     *this = result;
 }
 
+N operator / (N& a, N& b)
+{
+    string al = "\n";
+    N tmpNull("0");
+    if (a == tmpNull) return tmpNull;
+    if (b == tmpNull) throw;
+    int k = a.digit.size() - b.digit.size() + 1;
+    N tmp, result;
+    tmp.digit.push_back(a.digit[a.digit.size() - 1]);
+    int i;
+    for (i = a.digit.size() - 2; tmp < b && i >= 0; i--) {
+        tmp.digit.insert(tmp.digit.begin(), a.digit[i]);
+    } //i++;
+    for (int j = 0; j < k; j++) {
+        result.digit.insert(result.digit.begin(), 0);
+        while (tmp > b || tmp == b) {
+            tmp = tmp - b;
+            result.digit[0] += 1;
+        }
+        if (i >= 0) {
+            if (tmp == tmpNull) tmp.digit.erase(tmp.digit.begin());
+            tmp.digit.insert(tmp.digit.begin(), a.digit[i--]);
+        } else break;
+    }
+    return result;
+}
+
 //Оператор "%"
 N operator % (N& a, N& b)
 {
@@ -274,7 +301,7 @@ N operator % (N& a, N& b)
      * вычитает из исходного делимого и возвращает
      */
     N tmp = a;
-    tmp.divN(b);
+    tmp = tmp / b;
     tmp.mulN(b);
     return a - tmp;
 }
