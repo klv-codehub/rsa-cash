@@ -2,11 +2,6 @@
 #include "nclass.h"
 #include "mainwindow.h"
 
-N::N()
-{
-    //digit.push_back(0);
-}
-
 N::N(const char* str)
 {
     for(int i = strlen(str) - 1; i >=0 ; i--)
@@ -20,6 +15,37 @@ string N::to_str()
     for(int i = digit.size()-1; i >=0; i--)
         t+= digit[i] + '0';
     return t;
+}
+
+Z::Z(const char* str)
+{
+    sign = (str[0] == '-')?true:false;
+    module = str + sign;
+}
+
+string Z::to_str()
+{
+    string t;
+    if(sign) t += '-';
+    t+= module.to_str();
+    return t;
+}
+
+bool operator == (Z& a, Z& b){
+    //Два числа равны только тогда, когда они равны и по модулю и по знаку.
+    return (a.module == b.module && a.sign == b.sign);
+}
+bool operator > (Z& a, Z& b){
+    //Если числа равны по модулю, то a>b только тогда, когда a>0, а b<0.
+    if(a.module == b.module) return (b.sign - a.sign);
+    //Иначе, если число с большим модулем отрицательно, то оно меньше.
+    return (a.module > b.module)?(a.sign?false:true):(b.sign?true:false);
+}
+bool operator < (Z& a, Z& b){
+    //Если числа равны по модулю, то a<b только тогда, когда a<0, а b>0.
+    if(a.module == b.module) return (a.sign - b.sign);
+    //Иначе, если число с большим модулем отрицательно, то оно меньше.
+    return (a.module < b.module)?(b.sign?false:true):(a.sign?true:false);
 }
 //=======================================================================================
 

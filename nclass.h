@@ -6,7 +6,7 @@ class N
     private:
         byte_vector digit;
     public:
-        N();
+        N(){};
         N(const char* str);
         string to_str();
         string to_binstr();
@@ -20,16 +20,35 @@ class N
         void mulK(int k);
         //void mulN(N b);
 
-        friend N operator + (N& a, N& b);
-
-        friend bool operator < (N& a, N& b);
         friend bool operator > (N& a, N& b);
+        friend bool operator < (N& a, N& b);
         friend bool operator == (N& a, N& b);
 
+        friend N operator + (N& a, N& b);
         friend N operator - (N& a, N& b);
-        friend N operator / (N& a, N& b);
-        friend N operator % (N& a, N& b);
         friend N operator * (N& a, N& b);
+        friend N operator / (N& a, N& b);
+        friend N operator % (N& a, N& b);     
+};
+
+class Z
+{
+    private:
+        N module;
+        bool sign;
+    public:
+        Z(){};
+        Z(const char* str);
+        string to_str();
+
+        N abs();
+
+        friend bool operator > (Z& a, Z& b);
+        friend bool operator < (Z& a, Z& b);
+        friend bool operator == (Z& a, Z& b);
+
+        friend Z operator + (Z& a, Z& b);
+        friend Z operator - (Z& a, Z& b);
 };
 
 #endif // NCLASS_H
