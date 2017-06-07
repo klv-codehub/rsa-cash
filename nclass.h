@@ -23,6 +23,8 @@ class N
         friend bool operator > (N& a, N& b);
         friend bool operator < (N& a, N& b);
         friend bool operator == (N& a, N& b);
+        friend bool operator != (N& a, N& b);
+
 
         friend N operator + (N& a, N& b);
         friend N operator - (N& a, N& b);

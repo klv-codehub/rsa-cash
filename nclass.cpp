@@ -47,6 +47,51 @@ bool operator < (Z& a, Z& b){
     //Иначе, если число с большим модулем отрицательно, то оно меньше.
     return (a.module < b.module)?(b.sign?false:true):(a.sign?true:false);
 }
+
+Z operator + (Z& a, Z& b)
+{
+    Z res("0");
+    if (a.sign != b.sign) {
+        if (a.module != b.module) {
+            //Если знаки чисел и их модули различны, то
+            //результирующий модуль вычисляется как разность большего и меньшего модулей чисел,
+            //результирующий знак равен знаку большего по модулю числа
+            res.module = (a.module > b.module)?(a.module - b.module):(b.module - a.module);
+            res.sign = (a.module > b.module)?(a.sign):(b.sign);
+        }
+    } else {
+        //Если знаки чисел совпадают, то результирующий модуль равен сумме модулей,
+        //результирующий знак равен знаку первого числа
+        res.module = (a.module + b.module);
+        res.sign = a.sign;
+    }
+    return res;
+}
+
+Z operator - (Z& a, Z& b)
+{
+    Z res("0");
+    if (b.sign) {
+        //Если знак второго числа "минус", то вычитание превращается в сложение -> обращаемся к оператору сложения
+         Z tmpB = b;
+         tmpB.sign = false;
+         return (a + tmpB);
+    }
+    if (a.sign) {
+        //Если знак первого числа "минус" (знак второго числа всегда "плюс"),
+        //то складываем модули чисел, знак результриюущего числа отрицателен
+        res.module = a.module + b.module;
+        res.sign = a.sign;
+    } else {
+        //Если знак обоих чисел "минус", то находим модуль результриующего числа как разность модулей
+        //большего и меньшего чисел, если разность модулей чисел >= 0,
+        //то знак результирующего числа "плюс", в противном случае - "минус"
+        res.module = (a.module > b.module)?(a.module - b.module):(b.module - a.module);
+        res.sign = (a.module > b.module || a.module == b.module)?(false):(true);
+    }
+    return res;
+}
+
 //=======================================================================================
 
 //Оператор "+"
@@ -117,6 +162,15 @@ bool operator == (N& a, N& b)
     return true;
 }
 
+bool operator != (N& a, N& b)
+{
+    if (a.digit.size() != b.digit.size()) return true;
+    for (int i = a.digit.size() - 1; i >= 0; i--) {
+        if (a.digit[i] != b.digit[i]) return true;
+    }
+    return false;
+}
+
 //Оператор ">"
 bool operator > (N& a, N& b)
 {
@@ -160,34 +214,37 @@ N operator - (N& a, N& b)
      * result - результирующее число
      * dif - переменная, хранящая разность текущих цифр
      */
-    N result;
+    N result = a;
     int dif = 0;
     /*
      * Вычитание производится, пока не закончились цифры в меньшем числе
      */
+
     for (int i = 0; i < b.digit.size(); i++) {
-        a.digit[i] += dif;
-        if (a.digit[i] < b.digit[i] || a.digit[i] == 255) {
-            a.digit[i] += 10;
+        result.digit[i] += dif;
+        if (result.digit[i] < b.digit[i] || result.digit[i] == 255) {
+            result.digit[i] += 10;
             dif = -1;
         } else {
             dif = 0;
         }
-        result.digit.push_back(a.digit[i] - b.digit[i]);
+        result.digit[i] -= b.digit[i];
     }
+
     /*
      * Вычитание продолжается, пока не закончились цифры в большем числе
      */
+
     for (int i = b.digit.size(); i < a.digit.size(); i++) {
-        a.digit[i] += dif;
-        if (a.digit[i] == 255) {
-            a.digit[i] += 10;
+        result.digit[i] += dif;
+        if (result.digit[i] == 255) {
+            result.digit[i] += 10;
             dif = -1;
         } else {
             dif = 0;
         }
-        result.digit.push_back(a.digit[i]);
     }
+
     /*
      * Удаление незначащих нулей в результирующем числе
      */
