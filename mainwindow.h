@@ -24,7 +24,7 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-    void on_revmod_pushButton_clicked();
+    void on_pushButton_keygen_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -43,10 +43,32 @@ void MainWindow::logWrite(QString text)
     ui->textEdit->moveCursor(QTextCursor::End);
 }
 
-void MainWindow::on_revmod_pushButton_clicked()
+
+void MainWindow::on_pushButton_keygen_clicked()
 {
-    N e(ui->e_lineEdit->text().toStdString().c_str());
-    N fiN(ui->fiN_lineEdit->text().toStdString().c_str());
-    N mod = e.revmod(fiN);
-    ui->revmod_label->setText(QString::fromStdString(mod.to_str()));
+    N NOne("1");
+    N NZero("0");
+
+    N p (ui->lineEdit_p->text().toStdString().c_str());
+    N q (ui->lineEdit_q->text().toStdString().c_str());
+    N e (ui->lineEdit_q->text().toStdString().c_str());
+
+    N n = p*q;
+    N PmunusOne = p-NOne;  //FIXME
+    N QmunusOne = q-NOne;  //FIXME
+    N fiN = PmunusOne*QmunusOne;
+
+    N d = e.revmod(fiN);
+
+    ui->lineEdit_n->setText(QString::fromStdString(n.to_str()));
+    ui->lineEdit_d->setText(QString::fromStdString(d.to_str()));
+    if(d != NZero)
+    {
+        ui->tabWidget->setEnabled(true);
+    } else
+    {
+        ui->lineEdit_d->setText("Обратного числа к выбранному e по модулю fi(N) не существует!");
+        ui->tabWidget->setDisabled(true);
+    }
+
 }
