@@ -31,7 +31,7 @@
        <item row="0" column="1">
         <widget class="QLineEdit" name="lineEdit_p">
          <property name="text">
-          <string>Введите P</string>
+          <string>123</string>
          </property>
         </widget>
        </item>
@@ -45,7 +45,7 @@
        <item row="1" column="1">
         <widget class="QLineEdit" name="lineEdit_q">
          <property name="text">
-          <string>Введите Q</string>
+          <string>23</string>
          </property>
         </widget>
        </item>
@@ -59,7 +59,7 @@
        <item row="2" column="1">
         <widget class="QLineEdit" name="lineEdit_e">
          <property name="text">
-          <string>Введите открытую экспоненту</string>
+          <string>4</string>
          </property>
         </widget>
        </item>
@@ -116,7 +116,7 @@
        <bool>false</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_crypt">
        <property name="accessibleName">
@@ -147,7 +147,7 @@
          </widget>
         </item>
         <item row="1" column="2" rowspan="2">
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="pushButton_crypt_copy_result">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -160,7 +160,7 @@
          </widget>
         </item>
         <item row="1" column="3">
-         <widget class="QLineEdit" name="lineEdit_6"/>
+         <widget class="QLineEdit" name="lineEdit_decrypt_data"/>
         </item>
         <item row="0" column="3">
          <widget class="QLabel" name="label_2">
@@ -180,7 +180,7 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_2">
+         <widget class="QLineEdit" name="lineEdit_encrypt_result">
           <property name="readOnly">
            <bool>true</bool>
           </property>
@@ -197,7 +197,7 @@
          </widget>
         </item>
         <item row="2" column="3">
-         <widget class="QLineEdit" name="lineEdit_7">
+         <widget class="QLineEdit" name="lineEdit_decrypt_result">
           <property name="readOnly">
            <bool>true</bool>
           </property>
@@ -211,35 +211,35 @@
          </widget>
         </item>
         <item row="3" column="0" colspan="2">
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pushButton_encrypt">
           <property name="text">
            <string>Зашифровать число открытым ключом</string>
           </property>
          </widget>
         </item>
         <item row="3" column="3">
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="pushButton_decrypt">
           <property name="text">
            <string>Расшифровать число</string>
           </property>
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="lineEdit_encrypt_data"/>
         </item>
        </layout>
        <zorder>label_3</zorder>
        <zorder>label_14</zorder>
-       <zorder>lineEdit_6</zorder>
-       <zorder>pushButton_2</zorder>
-       <zorder>lineEdit_7</zorder>
+       <zorder>lineEdit_decrypt_data</zorder>
+       <zorder>pushButton_encrypt</zorder>
+       <zorder>lineEdit_decrypt_result</zorder>
        <zorder>label_2</zorder>
        <zorder>label</zorder>
-       <zorder>pushButton_4</zorder>
+       <zorder>pushButton_crypt_copy_result</zorder>
        <zorder>label_15</zorder>
-       <zorder>lineEdit</zorder>
-       <zorder>lineEdit_2</zorder>
-       <zorder>pushButton_3</zorder>
+       <zorder>lineEdit_encrypt_data</zorder>
+       <zorder>lineEdit_encrypt_result</zorder>
+       <zorder>pushButton_decrypt</zorder>
        <zorder>label_9</zorder>
       </widget>
       <widget class="QWidget" name="tab_sign">
@@ -278,10 +278,10 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_3"/>
+         <widget class="QLineEdit" name="lineEdit_signify_data"/>
         </item>
         <item row="1" column="2" rowspan="2">
-         <widget class="QPushButton" name="pushButton_5">
+         <widget class="QPushButton" name="pushButton_sign_copy_result">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -294,7 +294,7 @@
          </widget>
         </item>
         <item row="1" column="3">
-         <widget class="QLineEdit" name="lineEdit_8"/>
+         <widget class="QLineEdit" name="lineEdit_verify_data"/>
         </item>
         <item row="1" column="4">
          <widget class="QLabel" name="label_16">
@@ -314,10 +314,10 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_4"/>
+         <widget class="QLineEdit" name="lineEdit_signify_result"/>
         </item>
         <item row="2" column="3">
-         <widget class="QLineEdit" name="lineEdit_9"/>
+         <widget class="QLineEdit" name="lineEdit_verify_result"/>
         </item>
         <item row="2" column="4">
          <widget class="QLabel" name="label_17">
@@ -327,14 +327,14 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QPushButton" name="pushButton_6">
+         <widget class="QPushButton" name="pushButton_signify">
           <property name="text">
            <string>Получить подпись числа закрытым ключом</string>
           </property>
          </widget>
         </item>
         <item row="3" column="3">
-         <widget class="QPushButton" name="pushButton_7">
+         <widget class="QPushButton" name="pushButton_veryfy">
           <property name="text">
            <string>Восстановить подписанное число</string>
           </property>
@@ -392,19 +392,19 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>lineEdit_2</tabstop>
+  <tabstop>lineEdit_encrypt_result</tabstop>
   <tabstop>lineEdit_p</tabstop>
   <tabstop>lineEdit_q</tabstop>
   <tabstop>lineEdit_n</tabstop>
   <tabstop>lineEdit_d</tabstop>
   <tabstop>pushButton_keygen</tabstop>
   <tabstop>lineEdit_e</tabstop>
-  <tabstop>lineEdit</tabstop>
+  <tabstop>lineEdit_encrypt_data</tabstop>
   <tabstop>pushButton</tabstop>
-  <tabstop>lineEdit_6</tabstop>
-  <tabstop>lineEdit_7</tabstop>
-  <tabstop>pushButton_2</tabstop>
-  <tabstop>pushButton_3</tabstop>
+  <tabstop>lineEdit_decrypt_data</tabstop>
+  <tabstop>lineEdit_decrypt_result</tabstop>
+  <tabstop>pushButton_encrypt</tabstop>
+  <tabstop>pushButton_decrypt</tabstop>
  </tabstops>
  <resources/>
  <connections/>

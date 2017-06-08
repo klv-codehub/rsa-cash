@@ -1,6 +1,5 @@
 #include "common.h"
 #include "nclass.h"
-#include "mainwindow.h"
 
 N::N(const char* str)
 {
@@ -20,7 +19,7 @@ N::N(int a)
     while(a > 0);
 }
 
-string N::to_str()
+string N::to_str() const
 {
     string t;
     for(int i = digit.size()-1; i >=0; i--)
@@ -34,13 +33,13 @@ Z::Z(const char* str)
     module = str + sign;
 }
 
-Z::Z(N& a)
+Z::Z(const N& a)
 {
     sign = false;
     module = a;
 }
 
-string Z::to_str()
+string Z::to_str() const
 {
     string t;
     if(sign) t += '-';
@@ -53,7 +52,7 @@ N Z::abs()
     return module;
 }
 
-N N::revmod(N mod)
+N N::revmod(const N mod) const
 {
     N a = *this, b = mod, q, t;
     Z Va("1"), Vb("0"), Vt;
@@ -62,6 +61,8 @@ N N::revmod(N mod)
     N tmpOne(1);        //FIXME
     Z ZtmpNul(tmpNul);  //FIXME
     Z Zmod(mod);        //FIXME
+
+    dprint('\n' + a.to_str() + ' ' + mod.to_str() + '\n');
 
     while(b!=tmpNul)
     {
@@ -83,6 +84,7 @@ N N::revmod(N mod)
         Vb = Vt;
     }
 
+    dprint(a.to_str() + '\n');
     if(a == tmpOne)//НОД должен быть равен 1 для существования обратного
         if(Va < ZtmpNul)
             return (Va + Zmod).abs();
@@ -90,24 +92,24 @@ N N::revmod(N mod)
     else return 0;
 }
 
-bool operator == (Z& a, Z& b){
+bool operator == (const Z& a, const Z& b){
     //Два числа равны только тогда, когда они равны и по модулю и по знаку.
     return (a.module == b.module && a.sign == b.sign);
 }
-bool operator > (Z& a, Z& b){
+bool operator > (const Z& a, const Z& b){
     //Если числа равны по модулю, то a>b только тогда, когда a>0, а b<0.
     if(a.module == b.module) return (b.sign - a.sign);
     //Иначе, если число с большим модулем отрицательно, то оно меньше.
     return (a.module > b.module)?(a.sign?false:true):(b.sign?true:false);
 }
-bool operator < (Z& a, Z& b){
+bool operator < (const Z& a, const Z& b){
     //Если числа равны по модулю, то a<b только тогда, когда a<0, а b>0.
     if(a.module == b.module) return (a.sign - b.sign);
     //Иначе, если число с большим модулем отрицательно, то оно меньше.
     return (a.module < b.module)?(b.sign?false:true):(a.sign?true:false);
 }
 
-Z operator + (Z& a, Z& b)
+Z operator + (const Z& a, const Z& b)
 {
     Z res("0");
     if (a.sign != b.sign) {
@@ -127,7 +129,7 @@ Z operator + (Z& a, Z& b)
     return res;
 }
 
-Z operator - (Z& a, Z& b)
+Z operator - (const Z& a, const Z& b)
 {
     Z res("0");
     if (b.sign) {
@@ -151,7 +153,7 @@ Z operator - (Z& a, Z& b)
     return res;
 }
 
-Z operator * (Z& a, Z& b)
+Z operator * (const Z& a, const Z& b)
 {
     Z res;
     res.module = a.module * b.module;
@@ -162,7 +164,7 @@ Z operator * (Z& a, Z& b)
 //=======================================================================================
 
 //Оператор "+"
-N operator + (N& a, N& b)
+N operator + (const N& a, const N& b)
 {
     /*
      * Переменной bigger пирсваивается число с большим кол-вом цифр, smaller - с меньшим
@@ -216,7 +218,7 @@ N operator + (N& a, N& b)
 }
 
 //Оператор "=="
-bool operator == (N& a, N& b)
+bool operator == (const N& a, const N& b)
 {
     /*
      * Возвращает true, если числа равны,
@@ -229,7 +231,7 @@ bool operator == (N& a, N& b)
     return true;
 }
 
-bool operator != (N& a, N& b)
+bool operator != (const N& a, const N& b)
 {
     if (a.digit.size() != b.digit.size()) return true;
     for (int i = a.digit.size() - 1; i >= 0; i--) {
@@ -239,7 +241,7 @@ bool operator != (N& a, N& b)
 }
 
 //Оператор ">"
-bool operator > (N& a, N& b)
+bool operator > (const N& a, const N& b)
 {
     /*
      * Возвращает true, если (a > b),
@@ -255,7 +257,7 @@ bool operator > (N& a, N& b)
 }
 
 //Оператор "<"
-bool operator < (N& a, N& b)
+bool operator < (const N& a, const N& b)
 {
     /*
      * Возвращает true, если (a < b),
@@ -271,7 +273,7 @@ bool operator < (N& a, N& b)
 }
 
 //Оператор "-"
-N operator- (N& a, N& b)
+N operator- (const N& a, const N& b)
 {
     /*
      * Если уменьшаемое число меньше вычитаемого, то возвращается уменьшаемое
@@ -344,7 +346,7 @@ void N::mul10k (int k)
 }
 
 //Оператор "/"
-N operator / (N& a, N& b)
+N operator / (const N& a, const N& b)
 {
     N tmpNull("0");
     if (a == tmpNull) return tmpNull;
@@ -371,7 +373,7 @@ N operator / (N& a, N& b)
 }
 
 //Оператор "%"
-N operator % (N& a, N& b)
+N operator % (const N& a, const N& b)
 {
     /*
      * Находит целую часть от деления чисел, умножает результат на исходный делитель, получившееся число
@@ -384,7 +386,7 @@ N operator % (N& a, N& b)
 }
 
 //Метод класса N: перевод в двоичную строку
-string N::to_binstr()
+string N::to_binstr() const
 {
     dprint("BINSTR started\n");
     string t, nstr;
@@ -406,9 +408,8 @@ string N::to_binstr()
 }
 
 //Метод класса N: возведение в степень по модулю
-N N::powmod(N pow, N mod)
+N N::powmod(const N pow, const N mod) const
 {
-    dprint("POTOK VADIMA\n");
     N tmpOne("1"), res = *this;
     /*
      * Если степень равна 1, то производится деление по модулю и метод завершает своб работу
@@ -422,12 +423,12 @@ N N::powmod(N pow, N mod)
      * Каждый шаг возведения сопровождается делением по модулю, для того
      * чтобы уменьшить длительность операции возведения
      */
-    dprint("VTOROI POTOK VADIM!!!!\n");
+
     string powStr = pow.to_binstr();
-    dprint("333 POTOK VADIM!!!!\n");
+
     for (int i = 1; i < powStr.length(); i++) {
         dprint(std::to_string(i) + "\n");
-        //res.mulN(res);
+
         res = res * res;
         if (powStr[i] == '1') {
             res = res *(*this);
@@ -461,7 +462,7 @@ void N::mulK(int k)
 }
 
 //Оператор "*"
-N operator * (N& a, N& b)
+N operator * (const N& a, const N& b)
 {
     N result;
     N bigger = (a.digit.size() < b.digit.size())?b:a;
@@ -473,13 +474,6 @@ N operator * (N& a, N& b)
         result = result + tmp;
         tmp = bigger;
     }
+    dprint(a.to_str() + " * " + b.to_str() + " = " + result.to_str() + '\n');
     return result;
 }
-
-
-//=======================================================================================
-//string N::to_binstr();
-//byte_vector N::to_bytevector();
-
-//N N::powmod(N pow, N mod);
-

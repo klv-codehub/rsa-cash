@@ -17,23 +17,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    logWrite("PushButton clicked!\n");
-    //N a("7893465879586353567895865376879475865376465234321567786475378958342635798346546789857465758358346587958635356789586537687947586537646523432156778647533");
-    //N b("789346587958635356789586537687947586537646337895834263579834654678985746575835837893465879586353567895865376879475865376463378958342635798346546789857465758358346587958635583465879586353567895865376879475865376465234321567786446523432156778647533");
-    //N c("546796543");
-    //N res = a.powmod(b, c);
-    //logWrite(QString::fromStdString(a.to_str() + "^" + b.to_str() + " mod " + c.to_str() + " = \n" + res.to_str() + "\n"));
-    //N a("200");
-    //N b("45");
-    //N c = a - b;
-    N a("2813");
-    N b("8789");
-
-
-    N c = a.revmod(b);
-    logWrite(QString::fromStdString(a.to_str() + "-" + b.to_str() + "=" + c.to_str() + "\n"));
-//    Z d = c + b;
-//    logWrite(QString::fromStdString(c.to_str() + "+" + b.to_str() + "=" + d.to_str() + "\n"));
+    ui->textEdit->clear();
 }
 
 void MainWindow::logWrite(QString text)
@@ -51,8 +35,11 @@ void MainWindow::on_pushButton_keygen_clicked()
 
     N p (ui->lineEdit_p->text().toStdString().c_str());
     N q (ui->lineEdit_q->text().toStdString().c_str());
-    N e (ui->lineEdit_q->text().toStdString().c_str());
+    N e (ui->lineEdit_e->text().toStdString().c_str());
 
+    dprint(p.to_str() + '\n');
+    dprint(q.to_str() + '\n');
+    dprint(e.to_str() + '\n');
     N n = p*q;
     N PmunusOne = p-NOne;  //FIXME
     N QmunusOne = q-NOne;  //FIXME
@@ -65,10 +52,54 @@ void MainWindow::on_pushButton_keygen_clicked()
     if(d != NZero)
     {
         ui->tabWidget->setEnabled(true);
+        cryptocalc_public_key.n = n;
+        cryptocalc_public_key.e = e;
+        cryptocalc_private_key.n = n;
+        cryptocalc_private_key.d = d;
     } else
     {
         ui->lineEdit_d->setText("Обратного числа к выбранному e по модулю fi(N) не существует!");
         ui->tabWidget->setDisabled(true);
     }
+}
 
+
+
+void MainWindow::on_pushButton_encrypt_clicked()
+{
+    N data (ui->lineEdit_encrypt_data->text().toStdString().c_str());
+    N result = rsa_encrypt(data, cryptocalc_public_key);
+    ui->lineEdit_encrypt_result->setText(QString::fromStdString(result.to_str()));
+}
+
+void MainWindow::on_pushButton_decrypt_clicked()
+{
+    N data (ui->lineEdit_decrypt_data->text().toStdString().c_str());
+    N result = rsa_decrypt(data, cryptocalc_private_key);
+    ui->lineEdit_decrypt_result->setText(QString::fromStdString(result.to_str()));
+}
+
+
+void MainWindow::on_pushButton_crypt_copy_result_clicked()
+{
+    ui->lineEdit_decrypt_data->setText(ui->lineEdit_encrypt_result->text());
+}
+
+void MainWindow::on_pushButton_signify_clicked()
+{
+    N data (ui->lineEdit_signify_data->text().toStdString().c_str());
+    N result = rsa_signify(data, cryptocalc_private_key);
+    ui->lineEdit_signify_result->setText(QString::fromStdString(result.to_str()));
+}
+
+void MainWindow::on_pushButton_veryfy_clicked()
+{
+    N data (ui->lineEdit_verify_data->text().toStdString().c_str());
+    N result = rsa_verify(data, cryptocalc_public_key);
+    ui->lineEdit_verify_result->setText(QString::fromStdString(result.to_str()));
+}
+
+void MainWindow::on_pushButton_sign_copy_result_clicked()
+{
+    ui->lineEdit_verify_data->setText(ui->lineEdit_signify_result->text());
 }

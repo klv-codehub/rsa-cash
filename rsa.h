@@ -18,10 +18,10 @@ struct banknote{
 
 typedef 	list	<banknote> 			banknote_set;
 
-N rsa_encrypt(public_key& key);
-N rsa_decrypt(private_key& key)	;
-N rsa_signify(private_key& key)	;
-N rsa_verify(public_key& key);
-N rsa_blind(public_key& key, N& r);
+N rsa_encrypt(const N& num, const public_key& key);
+N rsa_decrypt(const N& num, const private_key& key)	;
+N rsa_signify(const N& num, const private_key& key)	;
+N rsa_verify(const N& num, const public_key& key);
+N rsa_blind(const N& num, const public_key& key, N& r);
 
 #endif // RSA_Hd

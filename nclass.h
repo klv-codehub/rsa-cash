@@ -9,30 +9,26 @@ class N
         N(){};
         N(const char* str);
         N(int a);
-        string to_str();
-        string to_binstr();
+        string to_str() const;
+        string to_binstr() const;
         byte_vector to_bytevector();
 
-        N powmod(N pow, N mod);
-        N revmod(N mod);
+        N powmod(const N pow, const N mod) const;
+        N revmod(const N mod) const;
 
         void mul10k(int k);
-        //void divN(N b);
-        bool chk0();
         void mulK(int k);
-        //void mulN(N b);
 
-        friend bool operator > (N& a, N& b);
-        friend bool operator < (N& a, N& b);
-        friend bool operator == (N& a, N& b);
-        friend bool operator != (N& a, N& b);
+        friend bool operator > (const N& a, const N& b);
+        friend bool operator < (const N& a, const N& b);
+        friend bool operator == (const N& a, const N& b);
+        friend bool operator != (const N& a, const N& b);
 
-
-        friend N operator + (N& a, N& b);
-        friend N operator - (N& a, N& b);
-        friend N operator * (N& a, N& b);
-        friend N operator / (N& a, N& b);
-        friend N operator % (N& a, N& b);     
+        friend N operator + (const N& a, const N& b);
+        friend N operator - (const N& a, const N& b);
+        friend N operator * (const N& a, const N& b);
+        friend N operator / (const N& a, const N& b);
+        friend N operator % (const N& a, const N& b);
 };
 
 class Z
@@ -43,18 +39,18 @@ class Z
     public:
         Z(){};
         Z(const char* str);
-        Z(N& a);
-        string to_str();
+        Z(const N& a);
+        string to_str() const;
 
         N abs();
 
-        friend bool operator > (Z& a, Z& b);
-        friend bool operator < (Z& a, Z& b);
-        friend bool operator == (Z& a, Z& b);
+        friend bool operator > (const Z& a, const Z& b);
+        friend bool operator < (const Z& a, const Z& b);
+        friend bool operator == (const Z& a, const Z& b);
 
-        friend Z operator + (Z& a, Z& b);
-        friend Z operator - (Z& a, Z& b);
-        friend Z operator * (Z& a, Z& b);
+        friend Z operator + (const Z& a, const Z& b);
+        friend Z operator - (const Z& a, const Z& b);
+        friend Z operator * (const Z& a, const Z& b);
 };
 
 #endif // NCLASS_H

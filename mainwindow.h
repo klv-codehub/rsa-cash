@@ -5,6 +5,7 @@
 //---------------------------------------------------------
 #include "common.h"
 #include "nclass.h"
+#include "rsa.h"
 //---------------------------------------------------------
 namespace Ui {
 class MainWindow;
@@ -26,10 +27,23 @@ private slots:
 
     void on_pushButton_keygen_clicked();
 
+    void on_pushButton_encrypt_clicked();
+
+    void on_pushButton_decrypt_clicked();
+
+    void on_pushButton_crypt_copy_result_clicked();
+
+    void on_pushButton_signify_clicked();
+
+    void on_pushButton_veryfy_clicked();
+
+    void on_pushButton_sign_copy_result_clicked();
+
 private:
     Ui::MainWindow *ui;
 //---------------------------------------------------------
-
+    public_key cryptocalc_public_key;
+    private_key cryptocalc_private_key;
 //---------------------------------------------------------
 };
 
