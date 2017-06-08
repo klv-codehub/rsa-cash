@@ -58,8 +58,11 @@ N N::revmod(N mod)
     N a = *this, b = mod, q, t;
     Z Va("1"), Vb("0"), Vt;
 
-    N tmpNul(0);//FIXME
-    N tmpOne(1);//FIXME
+    N tmpNul(0);        //FIXME
+    N tmpOne(1);        //FIXME
+    Z ZtmpNul(tmpNul);  //FIXME
+    Z Zmod(mod);        //FIXME
+
     while(b!=tmpNul)
     {
         q = a/b;
@@ -80,7 +83,11 @@ N N::revmod(N mod)
         Vb = Vt;
     }
 
-    return (a == tmpOne)?Va.abs():0;
+    if(a == tmpOne)//НОД должен быть равен 1 для существования обратного
+        if(Va < ZtmpNul)
+            return (Va + Zmod).abs();
+        else return Va.abs();
+    else return 0;
 }
 
 bool operator == (Z& a, Z& b){
