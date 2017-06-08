@@ -218,6 +218,7 @@ N operator + (const N& a, const N& b)
    /*
     * Возвращает результирующее число
     */
+   //dprint(a.to_str() + " + " + b.to_str() + " = " + result.to_str() + '\n');
    return result;
 }
 
@@ -328,6 +329,7 @@ N operator- (const N& a, const N& b)
     /*
      * Возвращает результирующее число
      */
+    //dprint(a.to_str() + " - " + b.to_str() + " = " + result.to_str() + '\n');
     return result;
 }
 
@@ -363,9 +365,9 @@ N operator / (const N& a, const N& b)
         tmp.digit.insert(tmp.digit.begin(), a.digit[i]);
     }
     for (int j = 0; j < k; j++) {
-        dprint("result1 = " + result.to_str() + '\n');
+       // dprint("result1 = " + result.to_str() + '\n');
         result.digit.insert(result.digit.begin(), 0);
-        dprint("result2 = " + result.to_str() + '\n');
+       // dprint("result2 = " + result.to_str() + '\n');
         while (tmp > b || tmp == b) {
             tmp = tmp - b;
             result.digit[0] += 1;
