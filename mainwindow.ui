@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>859</width>
-    <height>670</height>
+    <height>703</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -115,8 +115,14 @@
       <property name="enabled">
        <bool>false</bool>
       </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_crypt">
        <property name="accessibleName">
@@ -125,11 +131,21 @@
        <attribute name="title">
         <string>Шифрование</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout">
+       <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="1">
          <widget class="QLabel" name="label">
           <property name="text">
            <string>Шифровка</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Дешифровка</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -145,6 +161,9 @@
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEdit_encrypt_data"/>
         </item>
         <item row="1" column="2" rowspan="2">
          <widget class="QPushButton" name="pushButton_crypt_copy_result">
@@ -162,27 +181,10 @@
         <item row="1" column="3">
          <widget class="QLineEdit" name="lineEdit_decrypt_data"/>
         </item>
-        <item row="0" column="3">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Дешифровка</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="4">
          <widget class="QLabel" name="label_14">
           <property name="text">
            <string>Шифр</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_encrypt_result">
-          <property name="readOnly">
-           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -193,6 +195,13 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="lineEdit_encrypt_result">
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -224,9 +233,6 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_encrypt_data"/>
-        </item>
        </layout>
        <zorder>label_3</zorder>
        <zorder>label_14</zorder>
@@ -246,7 +252,7 @@
        <attribute name="title">
         <string>Цифровая подпись</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
+       <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="1">
          <widget class="QLabel" name="label_10">
           <property name="text">
@@ -363,6 +369,9 @@
      </layout>
     </item>
    </layout>
+   <zorder>groupBox</zorder>
+   <zorder>tabWidget</zorder>
+   <zorder>textEdit</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -370,7 +379,7 @@
      <x>0</x>
      <y>0</y>
      <width>859</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
