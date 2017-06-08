@@ -3,9 +3,13 @@
 
 N::N(const char* str)
 {
+    digit.push_back(0);
     for(int i = strlen(str) - 1; i >=0 ; i--)
         if('0' <= str[i] && str[i] <= '9')
             digit.push_back(str[i] - '0');
+    if (digit.size() > 1) {
+        digit.erase(digit.begin());
+    }
 }
 
 N::N(int a)
@@ -349,7 +353,7 @@ void N::mul10k (int k)
 N operator / (const N& a, const N& b)
 {
     N tmpNull("0");
-    if (a == tmpNull) return tmpNull;
+    if (a == tmpNull || a < b) return tmpNull;
     if (b == tmpNull) throw;
     int k = a.digit.size() - b.digit.size() + 1;
     N tmp, result;
@@ -359,7 +363,9 @@ N operator / (const N& a, const N& b)
         tmp.digit.insert(tmp.digit.begin(), a.digit[i]);
     }
     for (int j = 0; j < k; j++) {
+        dprint("result1 = " + result.to_str() + '\n');
         result.digit.insert(result.digit.begin(), 0);
+        dprint("result2 = " + result.to_str() + '\n');
         while (tmp > b || tmp == b) {
             tmp = tmp - b;
             result.digit[0] += 1;
@@ -369,6 +375,7 @@ N operator / (const N& a, const N& b)
             tmp.digit.insert(tmp.digit.begin(), a.digit[i--]);
         } else break;
     }
+    dprint(a.to_str() + " / " + b.to_str() + " = " + result.to_str() + '\n');
     return result;
 }
 
