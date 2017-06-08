@@ -26,15 +26,14 @@ void MainWindow::on_pushButton_clicked()
     //N a("200");
     //N b("45");
     //N c = a - b;
-    Z a("15");
-    Z b("50");
+    N a("2813");
+    N b("8789");
 
 
-    Z c = a - b;
+    N c = a.revmod(b);
     logWrite(QString::fromStdString(a.to_str() + "-" + b.to_str() + "=" + c.to_str() + "\n"));
-
-    Z d = c + b;
-    logWrite(QString::fromStdString(c.to_str() + "+" + b.to_str() + "=" + d.to_str() + "\n"));
+//    Z d = c + b;
+//    logWrite(QString::fromStdString(c.to_str() + "+" + b.to_str() + "=" + d.to_str() + "\n"));
 }
 
 void MainWindow::logWrite(QString text)
@@ -42,4 +41,12 @@ void MainWindow::logWrite(QString text)
     ui->textEdit->moveCursor(QTextCursor::End);
     ui->textEdit->insertPlainText(text);
     ui->textEdit->moveCursor(QTextCursor::End);
+}
+
+void MainWindow::on_revmod_pushButton_clicked()
+{
+    N e(ui->e_lineEdit->text().toStdString().c_str());
+    N fiN(ui->fiN_lineEdit->text().toStdString().c_str());
+    N mod = e.revmod(fiN);
+    ui->revmod_label->setText(QString::fromStdString(mod.to_str()));
 }

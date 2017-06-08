@@ -8,11 +8,13 @@ class N
     public:
         N(){};
         N(const char* str);
+        N(int a);
         string to_str();
         string to_binstr();
         byte_vector to_bytevector();
 
         N powmod(N pow, N mod);
+        N revmod(N mod);
 
         void mul10k(int k);
         //void divN(N b);
@@ -41,6 +43,7 @@ class Z
     public:
         Z(){};
         Z(const char* str);
+        Z(N& a);
         string to_str();
 
         N abs();
@@ -51,6 +54,7 @@ class Z
 
         friend Z operator + (Z& a, Z& b);
         friend Z operator - (Z& a, Z& b);
+        friend Z operator * (Z& a, Z& b);
 };
 
 #endif // NCLASS_H

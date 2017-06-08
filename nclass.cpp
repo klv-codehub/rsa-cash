@@ -9,6 +9,17 @@ N::N(const char* str)
             digit.push_back(str[i] - '0');
 }
 
+N::N(int a)
+{
+    if(a<0) a*= -1;
+    do
+    {
+         digit.push_back(a%10);
+         a = a/10;
+    }
+    while(a > 0);
+}
+
 string N::to_str()
 {
     string t;
@@ -23,12 +34,53 @@ Z::Z(const char* str)
     module = str + sign;
 }
 
+Z::Z(N& a)
+{
+    sign = false;
+    module = a;
+}
+
 string Z::to_str()
 {
     string t;
     if(sign) t += '-';
     t+= module.to_str();
     return t;
+}
+
+N Z::abs()
+{
+    return module;
+}
+
+N N::revmod(N mod)
+{
+    N a = *this, b = mod, q, t;
+    Z Va("1"), Vb("0"), Vt;
+
+    N tmpNul(0);//FIXME
+    N tmpOne(1);//FIXME
+    while(b!=tmpNul)
+    {
+        q = a/b;
+
+        t = b*q;
+        a = a-t;// FIXME: Выражение a = a-b*q не работает из-за каких-то проблем с перегрузкой
+
+        t = a;
+        a = b;
+        b = t;
+
+        Vt = q;
+        Vt = Vb*Vt; // FIXME
+        Va = Va-Vt; // FIXME: Выражение Va = Va-Vb*q не работает из-за каких-то проблем с перегрузкой
+
+        Vt = Va;
+        Va = Vb;
+        Vb = Vt;
+    }
+
+    return (a == tmpOne)?Va.abs():0;
 }
 
 bool operator == (Z& a, Z& b){
@@ -89,6 +141,14 @@ Z operator - (Z& a, Z& b)
         res.module = (a.module > b.module)?(a.module - b.module):(b.module - a.module);
         res.sign = (a.module > b.module || a.module == b.module)?(false):(true);
     }
+    return res;
+}
+
+Z operator * (Z& a, Z& b)
+{
+    Z res;
+    res.module = a.module * b.module;
+    res.sign = a.sign? b.sign?false:true : b.sign?true:false;
     return res;
 }
 
@@ -204,7 +264,7 @@ bool operator < (N& a, N& b)
 }
 
 //Оператор "-"
-N operator - (N& a, N& b)
+N operator- (N& a, N& b)
 {
     /*
      * Если уменьшаемое число меньше вычитаемого, то возвращается уменьшаемое
