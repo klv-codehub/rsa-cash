@@ -7,10 +7,11 @@ class N
         byte_vector digit;
     public:
         N(){};
-        N(const char* str);
-        N(int a);
-        string to_str() const;
-        string to_binstr() const;
+        N(int);
+        N(const QString);
+
+        QString to_str() const;
+        QString to_binstr() const;
         byte_vector to_bytevector();
 
         N powmod(const N pow, const N mod) const;
@@ -38,9 +39,10 @@ class Z
         bool sign;
     public:
         Z(){};
-        Z(const char* str);
-        Z(const N& a);
-        string to_str() const;
+        Z(int);
+        Z(const N&);
+        Z(const QString);
+        QString to_str() const;
 
         N abs();
 

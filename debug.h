@@ -7,6 +7,6 @@
 
 extern QTextEdit *DebugPrintQTE;
 
-bool dprint(std::string text);
+bool dprint(QString);
 
 #endif // DEBUG_H
