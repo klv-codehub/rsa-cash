@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     extern QTextEdit *DebugPrintQTE;
     DebugPrintQTE = ui->textEdit;
+
+    Alice = {"Alice", sber};
+    Bob = {"Bob", sber};
 }
 
 MainWindow::~MainWindow()
@@ -17,7 +20,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    ui->textEdit->clear();
+    //human John("John Doe");
+//    John.showmoney();
+//    John.spendmoney(500);
+//    John.showmoney();
+//    John.earnmoney(300);
+//    John.showmoney();
 }
 
 void MainWindow::logWrite(QString text)
@@ -91,4 +99,28 @@ void MainWindow::on_pushButton_veryfy_clicked()
 void MainWindow::on_pushButton_sign_copy_result_clicked()
 {
     ui->lineEdit_verify_data->setText(ui->lineEdit_signify_result->text());
+}
+
+void MainWindow::on_pushButton_Alice_putmoney_clicked()
+{
+    Alice.putmoney(ui->lineEdit_Alice_money->text());
+    ui->label_AliceValue->setText( Alice.balance().to_str() );
+}
+
+void MainWindow::on_pushButton_Alice_takemoney_clicked()
+{
+    Alice.takemoney(ui->lineEdit_Alice_money->text());
+    ui->label_AliceValue->setText( Alice.balance().to_str() );
+}
+
+void MainWindow::on_pushButton_Bob_putmoney_clicked()
+{
+    Bob.putmoney(ui->lineEdit_Bob_money->text());
+    ui->label_BobValue->setText( Bob.balance().to_str() );
+}
+
+void MainWindow::on_pushButton_Bob_takemoney_clicked()
+{
+    Bob.takemoney(ui->lineEdit_Bob_money->text());
+    ui->label_BobValue->setText( Bob.balance().to_str() );
 }

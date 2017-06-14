@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>859</width>
-    <height>703</height>
+    <width>921</width>
+    <height>732</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,390 +16,510 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="title">
-       <string>Генерация ключей</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>P</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit_p">
-         <property name="text">
-          <string>123</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>Q</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_q">
-         <property name="text">
-          <string>23</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>e</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_e">
-         <property name="text">
-          <string>4</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>N</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLineEdit" name="lineEdit_n">
-         <property name="text">
-          <string>Здесь будет посчитан модуль</string>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_8">
-         <property name="text">
-          <string>d</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QLineEdit" name="lineEdit_d">
-         <property name="text">
-          <string>Здесь будет посчитана закрытая экспонента</string>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0" colspan="2">
-        <widget class="QPushButton" name="pushButton_keygen">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Посчитать модуль и закрытую экспоненту</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
+     <widget class="QTabWidget" name="tabWidget_2">
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="tab_crypt">
-       <property name="accessibleName">
-        <string/>
-       </property>
+      <widget class="QWidget" name="tab_4">
        <attribute name="title">
-        <string>Шифрование</string>
+        <string>Tab 2</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox_11">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="title">
+           <string>Алиса. Счёт в банке</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_16">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_91">
+             <property name="text">
+              <string>Value</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_AliceValue">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QLineEdit" name="lineEdit_Alice_money">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="pushButton_Alice_putmoney">
+             <property name="text">
+              <string>Положить</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="pushButton_Alice_takemoney">
+             <property name="text">
+              <string>Снять</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
         <item row="0" column="1">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Шифровка</string>
+         <widget class="QGroupBox" name="groupBox_12">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
+          <property name="title">
+           <string>Боб. Счёт в банке</string>
           </property>
+          <layout class="QGridLayout" name="gridLayout_17">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_92">
+             <property name="text">
+              <string>Value</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QLineEdit" name="lineEdit_Bob_money">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="pushButton_Bob_putmoney">
+             <property name="text">
+              <string>Положить</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_BobValue">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="pushButton_Bob_takemoney">
+             <property name="text">
+              <string>Снять</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
-        <item row="0" column="3">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Дешифровка</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Число</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_encrypt_data"/>
-        </item>
-        <item row="1" column="2" rowspan="2">
-         <widget class="QPushButton" name="pushButton_crypt_copy_result">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>47</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>&gt;</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QLineEdit" name="lineEdit_decrypt_data"/>
-        </item>
-        <item row="1" column="4">
-         <widget class="QLabel" name="label_14">
-          <property name="text">
-           <string>Шифр</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Шифр</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_encrypt_result">
+        <item row="1" column="0" colspan="2">
+         <widget class="QTextEdit" name="textEdit">
           <property name="readOnly">
            <bool>true</bool>
           </property>
          </widget>
         </item>
-        <item row="2" column="3">
-         <widget class="QLineEdit" name="lineEdit_decrypt_result">
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="4">
-         <widget class="QLabel" name="label_15">
-          <property name="text">
-           <string>Число</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0" colspan="2">
-         <widget class="QPushButton" name="pushButton_encrypt">
-          <property name="text">
-           <string>Зашифровать число открытым ключом</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="QPushButton" name="pushButton_decrypt">
-          <property name="text">
-           <string>Расшифровать число</string>
-          </property>
-         </widget>
-        </item>
        </layout>
-       <zorder>label_3</zorder>
-       <zorder>label_14</zorder>
-       <zorder>lineEdit_decrypt_data</zorder>
-       <zorder>pushButton_encrypt</zorder>
-       <zorder>lineEdit_decrypt_result</zorder>
-       <zorder>label_2</zorder>
-       <zorder>label</zorder>
-       <zorder>pushButton_crypt_copy_result</zorder>
-       <zorder>label_15</zorder>
-       <zorder>lineEdit_encrypt_data</zorder>
-       <zorder>lineEdit_encrypt_result</zorder>
-       <zorder>pushButton_decrypt</zorder>
-       <zorder>label_9</zorder>
       </widget>
-      <widget class="QWidget" name="tab_sign">
+      <widget class="QWidget" name="tab_3">
        <attribute name="title">
-        <string>Цифровая подпись</string>
+        <string>Tab 1</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="1">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>Подпись</string>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Генерация ключей</string>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>e</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="lineEdit_e">
+             <property name="text">
+              <string>4</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>d</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_p">
+             <property name="text">
+              <string>123</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Q</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0" colspan="2">
+            <widget class="QPushButton" name="pushButton_keygen">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string>Посчитать модуль и закрытую экспоненту</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="lineEdit_q">
+             <property name="text">
+              <string>23</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="lineEdit_n">
+             <property name="text">
+              <string>Здесь будет посчитан модуль</string>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="lineEdit_d">
+             <property name="text">
+              <string>Здесь будет посчитана закрытая экспонента</string>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>P</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>N</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
-        <item row="0" column="3">
-         <widget class="QLabel" name="label_11">
-          <property name="text">
-           <string>Проверка подписи</string>
+        <item>
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="enabled">
+           <bool>false</bool>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
+          <property name="currentIndex">
+           <number>1</number>
+          </property>
+          <widget class="QWidget" name="tab_crypt">
+           <property name="accessibleName">
+            <string/>
+           </property>
+           <attribute name="title">
+            <string>Шифрование</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="lineEdit_encrypt_data"/>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Дешифровка</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Число</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Шифровка</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Шифр</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="lineEdit_encrypt_result">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2" rowspan="2">
+             <widget class="QPushButton" name="pushButton_crypt_copy_result">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>47</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>Шифр</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLineEdit" name="lineEdit_decrypt_data"/>
+            </item>
+            <item row="2" column="3">
+             <widget class="QLineEdit" name="lineEdit_decrypt_result">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QPushButton" name="pushButton_decrypt">
+              <property name="text">
+               <string>Расшифровать число</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="4">
+             <widget class="QLabel" name="label_15">
+              <property name="text">
+               <string>Число</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QPushButton" name="pushButton_encrypt">
+              <property name="text">
+               <string>Зашифровать число открытым ключом</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+           <zorder>label_3</zorder>
+           <zorder>label_14</zorder>
+           <zorder>lineEdit_decrypt_data</zorder>
+           <zorder>pushButton_encrypt</zorder>
+           <zorder>lineEdit_decrypt_result</zorder>
+           <zorder>label_2</zorder>
+           <zorder>label</zorder>
+           <zorder>pushButton_crypt_copy_result</zorder>
+           <zorder>label_15</zorder>
+           <zorder>lineEdit_encrypt_data</zorder>
+           <zorder>lineEdit_encrypt_result</zorder>
+           <zorder>pushButton_decrypt</zorder>
+           <zorder>label_9</zorder>
+          </widget>
+          <widget class="QWidget" name="tab_sign">
+           <attribute name="title">
+            <string>Цифровая подпись</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Подпись</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Проверка подписи</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>Число</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="lineEdit_signify_data"/>
+            </item>
+            <item row="1" column="2" rowspan="2">
+             <widget class="QPushButton" name="pushButton_sign_copy_result">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>47</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLineEdit" name="lineEdit_verify_data"/>
+            </item>
+            <item row="1" column="4">
+             <widget class="QLabel" name="label_16">
+              <property name="text">
+               <string>Подпись</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>Подпись</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="lineEdit_signify_result"/>
+            </item>
+            <item row="2" column="3">
+             <widget class="QLineEdit" name="lineEdit_verify_result"/>
+            </item>
+            <item row="2" column="4">
+             <widget class="QLabel" name="label_17">
+              <property name="text">
+               <string>Число</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QPushButton" name="pushButton_signify">
+              <property name="text">
+               <string>Получить подпись числа закрытым ключом</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QPushButton" name="pushButton_veryfy">
+              <property name="text">
+               <string>Восстановить подписанное число</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_12">
-          <property name="text">
-           <string>Число</string>
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Debug Info</string>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_signify_data"/>
-        </item>
-        <item row="1" column="2" rowspan="2">
-         <widget class="QPushButton" name="pushButton_sign_copy_result">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>47</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>&gt;</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QLineEdit" name="lineEdit_verify_data"/>
-        </item>
-        <item row="1" column="4">
-         <widget class="QLabel" name="label_16">
-          <property name="text">
-           <string>Подпись</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>Подпись</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_signify_result"/>
-        </item>
-        <item row="2" column="3">
-         <widget class="QLineEdit" name="lineEdit_verify_result"/>
-        </item>
-        <item row="2" column="4">
-         <widget class="QLabel" name="label_17">
-          <property name="text">
-           <string>Число</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QPushButton" name="pushButton_signify">
-          <property name="text">
-           <string>Получить подпись числа закрытым ключом</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="QPushButton" name="pushButton_veryfy">
-          <property name="text">
-           <string>Восстановить подписанное число</string>
-          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string>Клац!</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
       </widget>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="title">
-       <string>Debug Info</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QTextEdit" name="textEdit">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton">
-         <property name="text">
-          <string>Клац!</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>859</width>
-     <height>26</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>

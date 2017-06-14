@@ -206,10 +206,7 @@ N operator / (const N& a, const N& b)
 
 N operator % (const N& a, const N& b)
 {
-    N tmp = a;
-    tmp = tmp / b;
-    tmp = tmp * b;
-    return a - tmp;
+    return a - (a/b)*b; //Для ускорения можно реализовать как изменённое целочисленное деление
 }
 
 //перевод в двоичную строку
@@ -259,8 +256,8 @@ N N::powmod(const N pow, const N mod) const
 //нахождение обратного по модулю
 N N::revmod(const N mod) const
 {
-    N a = *this, b = mod, q, t;
-    Z Va = 1, Vb = 0, Vt;
+    N a = *this, b = mod, q;
+    Z Va = 1, Vb = 0;
 
     dprint('\n' + a.to_str() + ' ' + mod.to_str() + '\n');
 
@@ -269,15 +266,12 @@ N N::revmod(const N mod) const
         q = a/b;
         a = a-b*q;
         Va = Va-Vb*q;
-
-        t = a; Vt = Va;
-        a = b; Va = Vb;
-        b = t; Vb = Vt;
+        swap(a,b);
+        swap(Va, Vb);
     }
 
     if(a == 1)//НОД должен быть равен 1 для существования обратного
-        if(Va < 0)
-            return (Va + mod).abs();
+        if(Va < 0) return (Va + mod).abs();
         else return Va.abs();
     else return 0;
 }

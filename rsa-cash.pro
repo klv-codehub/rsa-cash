@@ -27,12 +27,14 @@ SOURCES +=  main.cpp \
         mainwindow.cpp \
         nclass.cpp \
         rsa.cpp \
-    debug.cpp
+    debug.cpp \
+    rsa-cash.cpp
 
 HEADERS  += mainwindow.h \
         nclass.h \
         common.h \
         rsa.h \
-    debug.h
+    debug.h \
+    rsa-cash.h
 
 FORMS    += mainwindow.ui

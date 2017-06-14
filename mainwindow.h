@@ -6,6 +6,7 @@
 #include "common.h"
 #include "nclass.h"
 #include "rsa.h"
+#include "rsa-cash.h"
 //---------------------------------------------------------
 namespace Ui {
 class MainWindow;
@@ -39,11 +40,23 @@ private slots:
 
     void on_pushButton_sign_copy_result_clicked();
 
+    void on_pushButton_Alice_putmoney_clicked();
+
+    void on_pushButton_Alice_takemoney_clicked();
+
+    void on_pushButton_Bob_putmoney_clicked();
+
+    void on_pushButton_Bob_takemoney_clicked();
+
 private:
     Ui::MainWindow *ui;
 //---------------------------------------------------------
     public_key cryptocalc_public_key;
     private_key cryptocalc_private_key;
+
+    human Alice;
+    human Bob;
+    bank sber;
 //---------------------------------------------------------
 };
 
