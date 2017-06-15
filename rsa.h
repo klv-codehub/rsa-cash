@@ -16,5 +16,5 @@ N rsa_decrypt(const N& num, const private_key& key)	;
 N rsa_signify(const N& num, const private_key& key)	;
 N rsa_verify(const N& num, const public_key& key);
 N rsa_blind(const N& num, const public_key& key, N& r);
-N rsa_unblind(const N& num, N& r);
+N rsa_unblind(const N& num, const public_key& key, N& r);
 #endif // RSA_H

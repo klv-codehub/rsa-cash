@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     keypair t;
     t.n = 143;
     t.e = 7;
-    t.d = 17;
+    t.d = 103;
     keyStorage["key_1"] = t;
     t.n = 123;
     t.e = 432;
@@ -54,6 +54,7 @@ void MainWindow::on_pushButton_AliceDeposit_clicked()
     if(!ui->listWidget_AliceWallet->selectedItems().isEmpty())
     {
         N serial = ui->listWidget_AliceWallet->currentItem()->text();
+        dprint("LOL: " + serial.to_str() + "\n");
         //currencyKeyName.remove(0, currencyKeyName.indexOf(' ') + 1);
         //N nom = sber.getKeyNameMap()[currencyKeyName];
 

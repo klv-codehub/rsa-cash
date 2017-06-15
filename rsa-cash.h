@@ -53,11 +53,11 @@ public:
     N signBanknote(human *client, N nom, N blinded_hash);
     bool depositBanknote(human *client, banknote B);
 
-    publicCurrencyMap getCurrencyMap()          {return pubMap;}
-    privateCurrencyMap getCurrencyPrivateMap()  {return privMap;}
-    keyNameMap getKeyNameMap()                  {return nameMap;}
-    emitedSignsList getEmitedSignsList()        {return emitedList;}
-    spendedSerialsList getSpendedSerialsList()  {return spendedList;}
+    publicCurrencyMap   getCurrencyMap()          {return pubMap;}
+    privateCurrencyMap  getCurrencyPrivateMap()   {return privMap;}
+    keyNameMap          getKeyNameMap()           {return nameMap;}
+    emitedSignsList     getEmitedSignsList()      {return emitedList;}
+    spendedSerialsList  getSpendedSerialsList()   {return spendedList;}
 };
 
 class human

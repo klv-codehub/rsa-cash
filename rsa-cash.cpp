@@ -14,6 +14,10 @@ N bank::signBanknote(human *client, N nom, N blinded_hash)
 {
     dprint("Банк: Клиент '" + client->name + "' запросил выпуск банкноты с номиналом '"
            + nom.to_str() + "' и затемнёным хэшем '" + blinded_hash.to_str() + "'.\n");
+    if( !(blinded_hash > 1) ){
+        dprint("Банк: Я могу подписать только хэши больше еденицы. Запрос отклонён.'\n");
+        return 0;
+    }
     if(!pubMap.contains(nom)){
         dprint("Банк: Такой номинал мною не выпускается. Запрос отклонён.'\n");
         return 0;
@@ -26,7 +30,7 @@ N bank::signBanknote(human *client, N nom, N blinded_hash)
     N blind_hash_sign = rsa_signify(blinded_hash, privMap[nom]);
 
     if(emitedList.contains(blind_hash_sign)){
-        dprint("Банк: Банкнота с получившейся подписью уже выпускалась. Запрос отклонён.'\n");
+        dprint("Банк: Банкнота с получившейся подписью уже выпускалась. Запрос отклонён.\n");
         return 0;
     }
     //По идее эта проверка не обязательна, но клиент в принципе волен не использовать затемняющий множитель.
@@ -61,7 +65,7 @@ bool human::emitBanknote(N nom, N serial, N R)
            + "' и серийным номером '" + serial.to_str() + "'. Возьму затемняющий множитель R = " + R.to_str() + ".\n");
     if(banking->getCurrencyMap().contains(nom))
     {
-        N blinded_hash = banking->hash(serial) * rsa_verify(R, banking->getCurrencyMap()[nom]);
+        N blinded_hash = rsa_blind(banking->hash(serial), banking->getCurrencyMap()[nom], R);
         dprint(this->name + ": Вычисляю f(serial) * R^e mod n = '" + blinded_hash.to_str() + "' и посылаю это число банку.\n");
         banknote B;
         B.sign = banking->signBanknote(this, nom, blinded_hash);
@@ -69,13 +73,13 @@ bool human::emitBanknote(N nom, N serial, N R)
             B.nom = nom;
             B.serial = serial;
             B.is_spended = 0;
-
             dprint(this->name + ": Банк прислал подпись '" + B.sign.to_str() +
-                   "'. Поделю её на R, чтобы снять затемняющий можножитель.\n");
-            B.sign = B.sign / R;
+                   "'. Умножу её на 1/R mod n, чтобы снять затемняющий можножитель.\n");
+            B.sign = rsa_unblind(B.sign, banking->getCurrencyMap()[nom], R);
             dprint(this->name + ": У меня получилась подпись '" + B.sign.to_str() +
                    "'. Теперь я могу пользоваться выпущенной банкнотой.\n");
-            wallet[B.nom] = B;
+            wallet[B.serial] = B;
+            dprint("AHA: " + wallet[B.nom].nom.to_str() + " " + wallet[B.nom].serial.to_str() + " " + wallet[B.nom].sign.to_str() + "\n" );
             return true;
         }
         else dprint(this->name + ": К сожалению, банк отказался подписывать мою банкноту.\n");

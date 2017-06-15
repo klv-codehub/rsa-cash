@@ -24,10 +24,11 @@ N rsa_verify(const N& num, const public_key& key)
 
 N rsa_blind(const N& num, const public_key& key, N& r)
 {
-    return num * r.powmod(key.e, key.n) % key.n;
+    return (num * r.powmod(key.e, key.n)) % key.n;
 }
 
-N rsa_unblind(const N& num, N& r)
+//Из ключа здесь нужен только модуль, ключ целиком передаётся в эстетических целях
+N rsa_unblind(const N& num, const public_key& key, N& r)
 {
-    return num / r;
+    return (num * r.revmod(key.n)) % key.n;
 }
