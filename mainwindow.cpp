@@ -8,9 +8,28 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     extern QTextEdit *DebugPrintQTE;
     DebugPrintQTE = ui->textEdit;
-
     Alice = {"Alice", sber};
     Bob = {"Bob", sber};
+    sber.register_client(&Alice);   //Из-за странного бага с this в конструкторе
+    sber.register_client(&Bob);     //Регистрацию в банке проводим здесь
+    ui->label_BobValue->setText( Bob.balance().to_str() );
+    ui->label_AliceValue->setText( Alice.balance().to_str() );
+
+    keypair t;
+    t.n = 1;
+    t.e = 7;
+    t.d = 9;
+    keyStorage["key_1"] = t;
+    t.n = 123;
+    t.e = 432;
+    t.d = 3487;
+    keyStorage["key_2"] = t;
+    t.n = 23;
+    t.e = 43122;
+    t.d = 3484567;
+    keyStorage["key_3"] = t;
+
+    refreshKeys();
 }
 
 MainWindow::~MainWindow()
@@ -18,14 +37,26 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::refreshKeys()
+{
+    ui->comboBox_keypair_choose->clear();
+    QList<QString> keyList = keyStorage.keys();
+    foreach(QString i, keyList)
+        ui->comboBox_keypair_choose->addItem(i);
+}
+
+void MainWindow::refreshNominals()
+{
+    ui->listWidget_bank_nom->clear();
+    keyNameMap nameMap = sber.getKeyNameMap();
+    QList<QString> nameList = nameMap.keys();
+    foreach(QString i, nameList)
+        ui->listWidget_bank_nom->addItem(nameMap[i].to_str() + " " + i);
+}
+
 void MainWindow::on_pushButton_clicked()
 {
-    //human John("John Doe");
-//    John.showmoney();
-//    John.spendmoney(500);
-//    John.showmoney();
-//    John.earnmoney(300);
-//    John.showmoney();
+
 }
 
 void MainWindow::logWrite(QString text)
@@ -123,4 +154,40 @@ void MainWindow::on_pushButton_Bob_takemoney_clicked()
 {
     Bob.takemoney(ui->lineEdit_Bob_money->text());
     ui->label_BobValue->setText( Bob.balance().to_str() );
+}
+
+void MainWindow::on_pushButton_bank_addcurrency_clicked()
+{
+    sber.addCurrency(ui->lineEdit_bank_nom->text(),
+                     keyStorage[ui->comboBox_keypair_choose->currentText()],
+                        ui->comboBox_keypair_choose->currentText());
+    refreshNominals();
+}
+
+void MainWindow::on_pushButton_banknote_sign_clicked()
+{
+    ui->comboBox_banknote_nom->currentText();
+}
+
+void MainWindow::on_comboBox_keypair_choose_currentIndexChanged(int index)
+{
+    QString currentKeyName = ui->comboBox_keypair_choose->currentText();
+    ui->lineEdit_bank_N->setText(keyStorage[currentKeyName].n.to_str());
+    ui->lineEdit_bank_d->setText(keyStorage[currentKeyName].d.to_str());
+    ui->lineEdit_bank_e->setText(keyStorage[currentKeyName].e.to_str());
+}
+
+void MainWindow::on_pushButton_bank_nom_forget_clicked()
+{
+    if(!ui->listWidget_bank_nom->selectedItems().isEmpty())
+    {
+        QString currencyKeyName = ui->listWidget_bank_nom->currentItem()->text();
+        currencyKeyName.remove(0, currencyKeyName.indexOf(' ') + 1);
+        N nom = sber.getKeyNameMap()[currencyKeyName];
+
+        sber.removeCurrency(currencyKeyName);
+        refreshNominals();
+
+        dprint("Банк: Я больше не принимаю номинал '" + nom.to_str() + "' по ключу '" + currencyKeyName + "'.\n");
+    }
 }

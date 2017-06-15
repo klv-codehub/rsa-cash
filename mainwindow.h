@@ -21,6 +21,8 @@ public:
     ~MainWindow();
 //---------------------------------------------------------
     void logWrite(QString text);
+    void refreshKeys();
+    void refreshNominals();
 //---------------------------------------------------------
 
 private slots:
@@ -48,6 +50,14 @@ private slots:
 
     void on_pushButton_Bob_takemoney_clicked();
 
+    void on_pushButton_bank_addcurrency_clicked();
+
+    void on_pushButton_banknote_sign_clicked();
+
+    void on_comboBox_keypair_choose_currentIndexChanged(int index);
+
+    void on_pushButton_bank_nom_forget_clicked();
+
 private:
     Ui::MainWindow *ui;
 //---------------------------------------------------------
@@ -57,6 +67,8 @@ private:
     human Alice;
     human Bob;
     bank sber;
+
+    keyMap keyStorage;
 //---------------------------------------------------------
 };
 
