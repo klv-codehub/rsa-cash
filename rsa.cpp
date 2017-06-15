@@ -26,3 +26,8 @@ N rsa_blind(const N& num, const public_key& key, N& r)
 {
     return num * r.powmod(key.e, key.n) % key.n;
 }
+
+N rsa_unblind(const N& num, N& r)
+{
+    return num / r;
+}

@@ -23,6 +23,9 @@ public:
     void logWrite(QString text);
     void refreshKeys();
     void refreshNominals();
+    void refreshEmited();
+    void refreshSpended();
+    void refreshAliceWallet();
 //---------------------------------------------------------
 
 private slots:
@@ -57,6 +60,8 @@ private slots:
     void on_comboBox_keypair_choose_currentIndexChanged(int index);
 
     void on_pushButton_bank_nom_forget_clicked();
+
+    void on_pushButton_AliceDeposit_clicked();
 
 private:
     Ui::MainWindow *ui;

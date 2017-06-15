@@ -11,17 +11,10 @@ struct private_key{
     N d;	// Закрытая экспонента
 };
 
-struct banknote{
-    N nominal;			//Номинал банкноты - рубль, сотка, касарь итд
-    public_key blinder; //Открытая часть ключа, которым банк будет подписывать серийник банкноты
-};
-
-typedef 	list	<banknote> 			banknote_set;
-
 N rsa_encrypt(const N& num, const public_key& key);
 N rsa_decrypt(const N& num, const private_key& key)	;
 N rsa_signify(const N& num, const private_key& key)	;
 N rsa_verify(const N& num, const public_key& key);
 N rsa_blind(const N& num, const public_key& key, N& r);
-
-#endif // RSA_Hd
+N rsa_unblind(const N& num, N& r);
+#endif // RSA_H

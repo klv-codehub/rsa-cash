@@ -3,6 +3,104 @@
 #include "rsa.h"
 #include "rsa-cash.h"
 
+//Односторонняя немультипликативная функция
+N bank::hash(const N& X)
+{
+    return X;//Пока что здесь стоит заглушка - функция Y=X
+}
+
+//Возвращает подпись (F(k)*(r^e mod n))^d mod n
+N bank::signBanknote(human *client, N nom, N blinded_hash)
+{
+    dprint("Банк: Клиент '" + client->name + "' запросил выпуск банкноты с номиналом '"
+           + nom.to_str() + "' и затемнёным хэшем '" + blinded_hash.to_str() + "'.\n");
+    if(!pubMap.contains(nom)){
+        dprint("Банк: Такой номинал мною не выпускается. Запрос отклонён.'\n");
+        return 0;
+    }
+    if(storage[client] < nom){
+        dprint("Банк: У клиента недостаточно средств на счету для выпуска банкноты такого номинала. Запрос отклонён.'\n");
+        return 0;
+    }
+
+    N blind_hash_sign = rsa_signify(blinded_hash, privMap[nom]);
+
+    if(emitedList.contains(blind_hash_sign)){
+        dprint("Банк: Банкнота с получившейся подписью уже выпускалась. Запрос отклонён.'\n");
+        return 0;
+    }
+    //По идее эта проверка не обязательна, но клиент в принципе волен не использовать затемняющий множитель.
+//    if(spendedMap.contains(blind_number)){
+//        dprint("Банк: Банкнота с таким номером уже тратилась. Запрос отклонён.'\n");
+//        return 0;
+//    } CHECKME (R = 1)
+    this->take(client, nom);
+    emitedList.append(blind_hash_sign);
+    dprint("Банк: Я согласен выпустить эту банкноту. Моя подпись: '"
+           + blind_hash_sign.to_str() + "'. Номинал купюры списан со счёта клиента.\n");
+    return blind_hash_sign;
+}
+
+bool bank::depositBanknote(human *client, banknote B)
+{
+    dprint("Банк: Клиент '" + client->name + "' хочет положить на счёт банкноту с номиналом '"
+           + B.nom.to_str() + "', серийным номером '" + B.serial.to_str() + "' и подписью '" + B.sign.to_str() + "'.\n");
+    if(spendedList.contains(B.serial)){
+        dprint("Банк: Эта банкнота была потрачена ранее. Запрос отклонён.\n");
+        return false;
+    }
+    this->put(client, B.nom);
+    spendedList.append(B.serial);
+    dprint("Банк: Номинал банкноты был добавлен к счёту клиента, а её серийный номер был занесён в список потраченых.\n");
+    return true;
+}
+
+bool human::emitBanknote(N nom, N serial, N R)
+{
+    dprint(this->name + ": Хочу выпустить банкноту с номиналом '" + nom.to_str()
+           + "' и серийным номером '" + serial.to_str() + "'. Возьму затемняющий множитель R = " + R.to_str() + ".\n");
+    if(banking->getCurrencyMap().contains(nom))
+    {
+        N blinded_hash = banking->hash(serial) * rsa_verify(R, banking->getCurrencyMap()[nom]);
+        dprint(this->name + ": Вычисляю f(serial) * R^e mod n = '" + blinded_hash.to_str() + "' и посылаю это число банку.\n");
+        banknote B;
+        B.sign = banking->signBanknote(this, nom, blinded_hash);
+        if(B.sign != 0){
+            B.nom = nom;
+            B.serial = serial;
+            B.is_spended = 0;
+
+            dprint(this->name + ": Банк прислал подпись '" + B.sign.to_str() +
+                   "'. Поделю её на R, чтобы снять затемняющий можножитель.\n");
+            B.sign = B.sign / R;
+            dprint(this->name + ": У меня получилась подпись '" + B.sign.to_str() +
+                   "'. Теперь я могу пользоваться выпущенной банкнотой.\n");
+            wallet[B.nom] = B;
+            return true;
+        }
+        else dprint(this->name + ": К сожалению, банк отказался подписывать мою банкноту.\n");
+    }
+    else dprint(this->name + ": К сожалению, банк не выпускает банкноты с таким номиналом.\n");
+    return false;
+}
+
+bool human::depositBanknote(N serial)
+{
+    dprint(this->name + ": Хочу положить на свой счёт банкноту с серийным номером '" + serial.to_str() + "'.\n");
+
+    if (banking->depositBanknote(this, wallet[serial]) )
+    {
+        dprint(this->name + ": Банк принял мою банкноту и добавил её номинал на мой счёт.\n");
+        return true;
+    }
+    else
+    {
+        dprint(this->name + ": Банк не принял мою банкноту.\n");
+        return false;
+    }
+}
+
+
 bool bank::addCurrency(N nom, keypair kp, QString keyname)
 {
     if(pubMap.contains(nom))
@@ -87,7 +185,7 @@ human::human(const QString label, bank& banking_service)
 
 void human::sayname()
 {
-    dprint("Клиент: мой адрес: " + QString::number((int)this) + "P\n");
+   // dprint("Клиент: мой адрес: " + QString::number((int)this) + "P\n");
 }
 
 

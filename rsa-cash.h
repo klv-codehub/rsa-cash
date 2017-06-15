@@ -7,12 +7,24 @@ struct keypair{
     N d;	// Закрытая экспонента
 };
 
+struct banknote{
+    N serial;      //Номер
+    N nom;         //Номинал
+    N sign;        //Подпись банка
+    bool is_spended;    //Флаг потраченности (используется только внутри кошелька)
+};
+
+
+typedef QMap <N, banknote> banknotesMap;      //Серийник - ключ
+
+
 typedef QMap <N, public_key> publicCurrencyMap;
 typedef QMap <N, private_key> privateCurrencyMap;
-typedef QMap <N, N> emitedCurrencyMap;  //Номер и номинал
-typedef QMap <N, N> spendedCurrencyMap; //Номер и номинал
+typedef QList <N> emitedSignsList;      //Поставленные подписи
+typedef QList <N> spendedSerialsList;   //Потраченные серийники
 typedef QMap <QString, keypair> keyMap; //Имя ключевой пары и она сама
 typedef QMap <QString, N> keyNameMap;   //Номинал и имя ключа
+
 
 class human;
 
@@ -23,37 +35,48 @@ private:
     publicCurrencyMap pubMap;
     privateCurrencyMap privMap;
     keyNameMap nameMap;
-    emitedCurrencyMap emitedMap;
-    spendedCurrencyMap spendedMap;
+    emitedSignsList emitedList;
+    spendedSerialsList spendedList;
 public:
     bank(){};
     void register_client(human *client);
     N balance(const human *client) const;
+
+    N hash(const N& X);
+
     bool put (human *client, const N sum);
     bool take(human *client, const N sum);
 
     bool addCurrency(N nom, keypair kp, QString keyname);
     bool removeCurrency(QString keyname);
+
+    N signBanknote(human *client, N nom, N blinded_hash);
+    bool depositBanknote(human *client, banknote B);
+
     publicCurrencyMap getCurrencyMap()          {return pubMap;}
-    privateCurrencyMap getCurrencyPrivateMap()   {return privMap;}
+    privateCurrencyMap getCurrencyPrivateMap()  {return privMap;}
     keyNameMap getKeyNameMap()                  {return nameMap;}
-    emitedCurrencyMap getEmitedNumbersMap()     {return emitedMap;}
-    spendedCurrencyMap getSpendedNumbersMap()   {return spendedMap;}
+    emitedSignsList getEmitedSignsList()        {return emitedList;}
+    spendedSerialsList getSpendedSerialsList()  {return spendedList;}
 };
 
 class human
 {
     private:
-        friend bank;
-        QString name;
         bank *banking;
+        banknotesMap wallet;
     public:
+        QString name;
         void sayname();
         human();
         human(const QString label, bank &banking_service);
         N balance() const;
         bool putmoney(const N sum);
         bool takemoney(const N sum);
+
+        bool emitBanknote(N nom, N serial, N R);
+        bool depositBanknote(N serial);
+        banknotesMap getWallet()    {return wallet;}
 };
 
 
