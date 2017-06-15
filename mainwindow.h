@@ -63,6 +63,10 @@ private slots:
 
     void on_pushButton_AliceDeposit_clicked();
 
+    void on_pushButton_bank_emited_forget_clicked();
+
+    void on_pushButton_spended_forget_clicked();
+
 private:
     Ui::MainWindow *ui;
 //---------------------------------------------------------

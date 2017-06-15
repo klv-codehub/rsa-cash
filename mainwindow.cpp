@@ -238,3 +238,25 @@ void MainWindow::on_comboBox_keypair_choose_currentIndexChanged(int index)
     ui->lineEdit_bank_d->setText(keyStorage[currentKeyName].d.to_str());
     ui->lineEdit_bank_e->setText(keyStorage[currentKeyName].e.to_str());
 }
+
+void MainWindow::on_pushButton_bank_emited_forget_clicked()
+{
+    if(!ui->listWidget_bank_emited->selectedItems().isEmpty())
+    {
+        N sign = ui->listWidget_bank_emited->currentItem()->text();
+        sber.removeEmitedSignFromList(sign);
+        refreshEmited();
+        dprint("Банк: Подпись '" + sign.to_str() + "' удалена из реестра.\n");
+    }
+}
+
+void MainWindow::on_pushButton_spended_forget_clicked()
+{
+    if(!ui->listWidget_bank_spended->selectedItems().isEmpty())
+    {
+        N sign = ui->listWidget_bank_spended->currentItem()->text();
+        sber.removeSpendedSerialFromList(sign);
+        refreshSpended();
+        dprint("Банк: Серийный номер '" + sign.to_str() + "' удалён из реестра.\n");
+    }
+}

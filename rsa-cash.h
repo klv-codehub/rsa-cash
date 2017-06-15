@@ -49,6 +49,8 @@ public:
 
     bool addCurrency(N nom, keypair kp, QString keyname);
     bool removeCurrency(QString keyname);
+    bool removeEmitedSignFromList(N sign);
+    bool removeSpendedSerialFromList(N serial);
 
     N signBanknote(human *client, N nom, N blinded_hash);
     bool depositBanknote(human *client, banknote B);

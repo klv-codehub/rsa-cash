@@ -79,7 +79,7 @@ bool human::emitBanknote(N nom, N serial, N R)
             dprint(this->name + ": У меня получилась подпись '" + B.sign.to_str() +
                    "'. Теперь я могу пользоваться выпущенной банкнотой.\n");
             wallet[B.serial] = B;
-            dprint("AHA: " + wallet[B.nom].nom.to_str() + " " + wallet[B.nom].serial.to_str() + " " + wallet[B.nom].sign.to_str() + "\n" );
+            //dprint("AHA: " + wallet[B.nom].nom.to_str() + " " + wallet[B.nom].serial.to_str() + " " + wallet[B.nom].sign.to_str() + "\n" );
             return true;
         }
         else dprint(this->name + ": К сожалению, банк отказался подписывать мою банкноту.\n");
@@ -91,7 +91,7 @@ bool human::emitBanknote(N nom, N serial, N R)
 bool human::depositBanknote(N serial)
 {
     dprint(this->name + ": Хочу положить на свой счёт банкноту с серийным номером '" + serial.to_str() + "'.\n");
-
+    //Нельзя вызывать эту функцию для несуществующих серийных номеров из-за строчки ниже
     if (banking->depositBanknote(this, wallet[serial]) )
     {
         dprint(this->name + ": Банк принял мою банкноту и добавил её номинал на мой счёт.\n");
@@ -141,7 +141,15 @@ bool bank::removeCurrency(QString keyname)
     }
     else return false;
 }
+bool bank::removeEmitedSignFromList(N sign)
+{
+    return emitedList.removeOne(sign);
+}
 
+bool bank::removeSpendedSerialFromList(N serial)
+{
+    return spendedList.removeOne(serial);
+}
 
 
 
