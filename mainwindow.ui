@@ -57,14 +57,14 @@
            <item row="0" column="4">
             <widget class="QLabel" name="label_27">
              <property name="text">
-              <string>Список подписанных банкнот:</string>
+              <string>Список подписей:</string>
              </property>
             </widget>
            </item>
            <item row="0" column="5">
             <widget class="QLabel" name="label_28">
              <property name="text">
-              <string>Список потраченных банкнот:</string>
+              <string>Список потраченных серийников:</string>
              </property>
             </widget>
            </item>
