@@ -279,7 +279,7 @@ N N::revmod(const N mod) const
 // Zclass =================================================================
 Z::Z(int a)
 {
-    if(a<0) sign = 1;
+    sign = a<0?true:false;
     module = a;
 }
 Z::Z(const QString str)

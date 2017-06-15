@@ -47,6 +47,39 @@ void MainWindow::on_pushButton_banknote_sign_clicked()
     refreshEmited();
 }
 
+
+
+void MainWindow::on_pushButton_AliceDeposit_clicked()
+{
+    if(!ui->listWidget_AliceWallet->selectedItems().isEmpty())
+    {
+        N serial = ui->listWidget_AliceWallet->currentItem()->text();
+        //currencyKeyName.remove(0, currencyKeyName.indexOf(' ') + 1);
+        //N nom = sber.getKeyNameMap()[currencyKeyName];
+
+        Alice.depositBanknote(serial);
+
+        refreshAliceWallet();
+        ui->label_AliceValue->setText( Alice.balance().to_str() );
+        refreshSpended();
+    }
+}
+
+void MainWindow::on_pushButton_bank_nom_forget_clicked()
+{
+    if(!ui->listWidget_bank_nom->selectedItems().isEmpty())
+    {
+        QString currencyKeyName = ui->listWidget_bank_nom->currentItem()->text();
+        currencyKeyName.remove(0, currencyKeyName.indexOf(' ') + 1);
+        N nom = sber.getKeyNameMap()[currencyKeyName];
+
+        sber.removeCurrency(currencyKeyName);
+        refreshNominals();
+
+        dprint("Банк: Я больше не принимаю номинал '" + nom.to_str() + "' по ключу '" + currencyKeyName + "'.\n");
+    }
+}
+
 void MainWindow::refreshEmited()
 {
     ui->listWidget_bank_emited->clear();
@@ -203,35 +236,4 @@ void MainWindow::on_comboBox_keypair_choose_currentIndexChanged(int index)
     ui->lineEdit_bank_N->setText(keyStorage[currentKeyName].n.to_str());
     ui->lineEdit_bank_d->setText(keyStorage[currentKeyName].d.to_str());
     ui->lineEdit_bank_e->setText(keyStorage[currentKeyName].e.to_str());
-}
-
-void MainWindow::on_pushButton_bank_nom_forget_clicked()
-{
-    if(!ui->listWidget_bank_nom->selectedItems().isEmpty())
-    {
-        QString currencyKeyName = ui->listWidget_bank_nom->currentItem()->text();
-        currencyKeyName.remove(0, currencyKeyName.indexOf(' ') + 1);
-        N nom = sber.getKeyNameMap()[currencyKeyName];
-
-        sber.removeCurrency(currencyKeyName);
-        refreshNominals();
-
-        dprint("Банк: Я больше не принимаю номинал '" + nom.to_str() + "' по ключу '" + currencyKeyName + "'.\n");
-    }
-}
-
-void MainWindow::on_pushButton_AliceDeposit_clicked()
-{
-    if(!ui->listWidget_AliceWallet->selectedItems().isEmpty())
-    {
-        N serial = ui->listWidget_AliceWallet->currentItem()->text();
-        //currencyKeyName.remove(0, currencyKeyName.indexOf(' ') + 1);
-        //N nom = sber.getKeyNameMap()[currencyKeyName];
-
-        Alice.depositBanknote(serial);
-
-        refreshAliceWallet();
-        ui->label_AliceValue->setText( Alice.balance().to_str() );
-        refreshSpended();
-    }
 }
