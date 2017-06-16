@@ -20,8 +20,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 //---------------------------------------------------------
-    void logWrite(QString text);
-
     void refreshKeys();
     void refreshNominals();
     void refreshEmited();
@@ -34,6 +32,13 @@ public:
     void refreshAliceTradeWallet();
     void refreshBobBag();
     void refreshBobTradeBag();
+
+    void refreshAliceWalletPrice();
+    void refreshAliceTradeWalletPrice();
+    void refreshAliceBagPrice();
+
+    void refreshBobBagPrice();
+    void refreshBobTradeBagPrice();
 //---------------------------------------------------------
 
 private slots:
@@ -69,11 +74,25 @@ private slots:
 
     void on_pushButton_bank_nom_forget_clicked();
 
-    void on_pushButton_AliceDeposit_clicked();
-
     void on_pushButton_bank_emited_forget_clicked();
 
     void on_pushButton_spended_forget_clicked();
+
+    void on_pushButton_AliceTradeBanknote_clicked();
+
+    void on_pushButton_AliceUntradeBanknote_clicked();
+
+    void on_pushButton_AliceRemoveBanknote_clicked();
+
+    void on_pushButton_AliceDepositBanknote_clicked();
+
+    void on_pushButton_BobAddItem_clicked();
+
+    void on_pushButton_BobRemoveItem_clicked();
+
+    void on_pushButton_BobTradeItem_clicked();
+
+    void on_pushButton_BobUntradeItem_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -88,5 +107,8 @@ private:
     keyMap keyStorage;
 //---------------------------------------------------------
 };
+
+#include <QListWidget>
+void qListWidget_pos(char action, QListWidget *listWidget);
 
 #endif // MAINWINDOW_H

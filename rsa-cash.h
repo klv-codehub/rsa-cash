@@ -18,6 +18,7 @@ struct item{
     N price;
 };
 
+bool operator< (const item& A, const item& B);
 
 typedef QMap <N, banknote> banknotesMap;      //Серийник - ключ
 
@@ -87,6 +88,8 @@ class human
 
         bool emitBanknote(N nom, N serial, N R);
         bool depositBanknote(N serial);
+        bool removeBanknote(N serial);
+
         void tradeBanknote(N serial);
         void untradeBanknote(N serial);
 
@@ -95,10 +98,15 @@ class human
         void tradeItem(item new_item);
         void untradeItem(item old_item);
 
-        banknotesMap    getWallet()        {return wallet;}
-        banknotesMap    getTradeWallet()   {return trade_wallet;}
+        banknotesMap   getWallet()        {return wallet;}
+        banknotesMap   getTradeWallet()   {return trade_wallet;}
         itemMap        getBag()           {return bag;}
         itemMap        getTradeBag()      {return trade_bag;}
+
+        N   getWalletPrice();
+        N   getTradeWalletPrice();
+        N   getBagPrice();
+        N   getTradeBagPrice();
 };
 
 

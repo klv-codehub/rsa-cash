@@ -1,6 +1,11 @@
 #include "common.h"
 #include "nclass.h"
 
+N::N()
+{
+ //   digit.push_back(0);
+}
+
 N::N(int a)
 {
     if(a<0) a*= -1;
@@ -91,6 +96,7 @@ N operator + (const N& a, const N& b)
            }
        }
    }
+   dprint(a.to_str() + " + " + b.to_str() + " = " + result.to_str() + '\n');
    return result;
 }
 
@@ -126,6 +132,7 @@ N operator- (const N& a, const N& b)
         if (result.digit[i] != 0) return result;
         else result.digit.erase(result.digit.end() - 1);
     }
+    dprint(a.to_str() + " - " + b.to_str() + " = " + result.to_str() + '\n');
     return result;
 }
 
@@ -206,7 +213,9 @@ N operator / (const N& a, const N& b)
 
 N operator % (const N& a, const N& b)
 {
-    return a - (a/b)*b; //Для ускорения можно реализовать как изменённое целочисленное деление
+    N result = a - (a/b)*b;
+    dprint(a.to_str() + " % " + b.to_str() + " = " + result.to_str() + '\n');
+    return result ; //Для ускорения можно реализовать как изменённое целочисленное деление
 }
 
 //перевод в двоичную строку
@@ -251,12 +260,13 @@ N N::powmod(const N pow, const N mod) const
         }
         res = res % mod;
     }
+    dprint(this->to_str() + " ^ " + pow.to_str() + " mod " + mod.to_str() + " = " + res.to_str() + '\n');
     return res;
 }
 //нахождение обратного по модулю
 N N::revmod(const N mod) const
 {
-    N a = *this, b = mod, q;
+    N a = *this, b = mod, q, result;
     Z Va = 1, Vb = 0;
 
     dprint('\n' + a.to_str() + ' ' + mod.to_str() + '\n');
@@ -271,9 +281,11 @@ N N::revmod(const N mod) const
     }
 
     if(a == 1)//НОД должен быть равен 1 для существования обратного
-        if(Va < 0) return (Va + mod).abs();
-        else return Va.abs();
-    else return 0;
+        if(Va < 0) result = (Va + mod).abs();
+        else result = Va.abs();
+    else result = 0;
+    dprint(this->to_str() + " = 1/" + result.to_str() + " mod " + mod.to_str() + '\n');
+    return result;
 }
 
 // Zclass =================================================================

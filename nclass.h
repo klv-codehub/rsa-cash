@@ -6,7 +6,7 @@ class N
     private:
         byte_vector digit;
     public:
-        N(){};
+        N();
         N(int);
         N(const QString);
 

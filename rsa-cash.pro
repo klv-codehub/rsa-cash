@@ -28,7 +28,9 @@ SOURCES +=  main.cpp \
         nclass.cpp \
         rsa.cpp \
     debug.cpp \
-    rsa-cash.cpp
+    rsa-cash.cpp \
+    view.cpp \
+    controller.cpp
 
 HEADERS  += mainwindow.h \
         nclass.h \
