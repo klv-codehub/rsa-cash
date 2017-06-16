@@ -24,7 +24,7 @@ typedef QList <N> emitedSignsList;      //Поставленные подпис�
 typedef QList <N> spendedSerialsList;   //Потраченные серийники
 typedef QMap <QString, keypair> keyMap; //Имя ключевой пары и она сама
 typedef QMap <QString, N> keyNameMap;   //Номинал и имя ключа
-
+typedef QMap <QString, N> goodsMap;     //Название и цена товара
 
 class human;
 
@@ -67,22 +67,28 @@ class human
     private:
         bank *banking;
         banknotesMap wallet;
+        goodsMap     bag;
+        banknotesMap trade_wallet;
+        goodsMap     trade_bag;
     public:
         QString name;
         QString color;
         void sayname();
         human();
         human(const QString label, const QString _color, bank &banking_service);
+
         N balance() const;
         bool putmoney(const N sum);
         bool takemoney(const N sum);
 
         bool emitBanknote(N nom, N serial, N R);
         bool depositBanknote(N serial);
+
+        void addItem(QString name, N price);
+        void removeItem(QString name);
+
         banknotesMap getWallet()    {return wallet;}
 };
 
 
 #endif // RSACASH_H
-//requestList buildRequestList(N sum, nominalList nom)
-//rawBlindRequestList buildRawBlindRequestList(requestList A,

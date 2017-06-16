@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>937</width>
-    <height>782</height>
+    <height>935</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,8 +24,18 @@
        <attribute name="title">
         <string>Электронные наличные деньги</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_6">
-        <item row="1" column="1">
+       <layout class="QGridLayout" name="gridLayout_12">
+        <item row="0" column="0" colspan="2">
+         <widget class="QTextEdit" name="textEdit_protocol">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>150</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
          <widget class="QTabWidget" name="tabWidget_4">
           <property name="currentIndex">
            <number>0</number>
@@ -355,10 +365,101 @@
            <attribute name="title">
             <string>Сделка</string>
            </attribute>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_29">
+              <property name="text">
+               <string>Банкноты Алисы</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_33">
+              <property name="text">
+               <string>Сумма:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="label_30">
+              <property name="text">
+               <string>Товары Боба</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_34">
+              <property name="text">
+               <string>0 ₽</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4" colspan="3">
+             <widget class="QListWidget" name="listWidget_BobTradeBag"/>
+            </item>
+            <item row="2" column="0" colspan="3">
+             <widget class="QPushButton" name="pushButton_3">
+              <property name="text">
+               <string>Убрать банкноту</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="6">
+             <widget class="QLabel" name="label_36">
+              <property name="text">
+               <string>0 ₽</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QLabel" name="label_35">
+              <property name="text">
+               <string>Цена:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="4" colspan="3">
+             <widget class="QPushButton" name="pushButton_4">
+              <property name="text">
+               <string>Убрать товар</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QPushButton" name="pushButton_5">
+              <property name="font">
+               <font>
+                <pointsize>50</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+                <kerning>true</kerning>
+               </font>
+              </property>
+              <property name="text">
+               <string>↱↲</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="3">
+             <widget class="QListWidget" name="listWidget_AliceTradeWallet"/>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
-        <item row="2" column="0" colspan="2">
+        <item row="2" column="0">
          <widget class="QGroupBox" name="groupBox_3">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -367,85 +468,169 @@
            </sizepolicy>
           </property>
           <property name="title">
-           <string>Алиса</string>
+           <string>Алиса (Покупатель)</string>
           </property>
-          <layout class="QGridLayout" name="gridLayout_5">
-           <item row="0" column="0" colspan="3">
-            <layout class="QGridLayout" name="gridLayout_7">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_23">
-               <property name="text">
-                <string>₽</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="lineEdit_banknote_nom"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_24">
-               <property name="text">
-                <string>№</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="lineEdit_banknote_serial"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_25">
-               <property name="text">
-                <string>R</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="lineEdit_banknote_R"/>
-             </item>
-             <item row="3" column="0" colspan="2">
-              <widget class="QPushButton" name="pushButton_banknote_sign">
-               <property name="text">
-                <string>Получить новую банкноту</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="1" column="0" colspan="3">
-            <widget class="QListWidget" name="listWidget_AliceWallet"/>
-           </item>
-           <item row="2" column="0">
-            <widget class="QPushButton" name="pushButton_AliceDeposit">
-             <property name="text">
-              <string>Положить на счёт</string>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QTabWidget" name="tabWidget_5">
+             <property name="currentIndex">
+              <number>0</number>
              </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QPushButton" name="pushButton_banknoteSend">
-             <property name="text">
-              <string>Использовать  в сделке</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="QPushButton" name="pushButton_2">
-             <property name="text">
-              <string>Забыть</string>
-             </property>
+             <widget class="QWidget" name="tab_7">
+              <attribute name="title">
+               <string>Кошелёк</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="1" column="0" colspan="3">
+                <widget class="QListWidget" name="listWidget_AliceWallet"/>
+               </item>
+               <item row="2" column="0">
+                <widget class="QPushButton" name="pushButton_AliceDeposit">
+                 <property name="text">
+                  <string>Положить на счёт</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QPushButton" name="pushButton_banknoteSend">
+                 <property name="text">
+                  <string>Использовать  в сделке</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="QPushButton" name="pushButton_2">
+                 <property name="text">
+                  <string>Забыть</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0" colspan="3">
+                <layout class="QGridLayout" name="gridLayout_7">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_23">
+                   <property name="text">
+                    <string>₽</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="lineEdit_banknote_nom"/>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_24">
+                   <property name="text">
+                    <string>№</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLineEdit" name="lineEdit_banknote_serial"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_25">
+                   <property name="text">
+                    <string>R</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLineEdit" name="lineEdit_banknote_R"/>
+                 </item>
+                 <item row="3" column="0" colspan="2">
+                  <widget class="QPushButton" name="pushButton_banknote_sign">
+                   <property name="text">
+                    <string>Получить новую банкноту</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_8">
+              <attribute name="title">
+               <string>Сумка</string>
+              </attribute>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QListWidget" name="listWidget"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_9">
+                 <property name="text">
+                  <string>Использовать предмет</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
             </widget>
            </item>
           </layout>
          </widget>
         </item>
-        <item row="0" column="0" colspan="2">
-         <widget class="QTextEdit" name="textEdit_protocol">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>150</height>
-           </size>
+        <item row="2" column="1">
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Боб (Продавец)</string>
           </property>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="0" column="0" colspan="2">
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_31">
+               <property name="text">
+                <string>Название</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="lineEdit_item_name"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_32">
+               <property name="text">
+                <string>Цена ₽</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_item_price"/>
+             </item>
+             <item row="2" column="0" colspan="2">
+              <widget class="QPushButton" name="pushButton_create_item">
+               <property name="text">
+                <string>Выпустить товар</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QListView" name="listView"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="pushButton_7">
+             <property name="text">
+              <string>Использовать в сделке</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="pushButton_8">
+             <property name="text">
+              <string>Прекратить продажу</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
