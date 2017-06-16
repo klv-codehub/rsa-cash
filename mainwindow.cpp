@@ -37,6 +37,53 @@ MainWindow::MainWindow(QWidget *parent) :
     refreshKeys();
 }
 
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::refreshAliceWallet()
+{
+    ui->listWidget_AliceWallet->clear();
+    QList<banknote> banknotesList = Alice.getWallet().values();
+    foreach(banknote i, banknotesList)
+        ui->listWidget_AliceWallet->addItem(i.nom.to_str() + "₽ №" + i.serial.to_str() + " &" + i.sign.to_str() + "\n");
+}
+
+void MainWindow::refreshAliceTradeWallet()
+{
+    ui->listWidget_AliceTradeWallet->clear();
+    QList<banknote> TradeBanknotesList = Alice.getTradeWallet().values();
+    foreach(banknote i, TradeBanknotesList)
+        ui->listWidget_AliceTradeWallet->addItem(i.nom.to_str() + "₽ №" + i.serial.to_str() + " &" + i.sign.to_str() + "\n");
+}
+
+void MainWindow::refreshAliceBag()
+{
+    ui->listWidget_AliceBag->clear();
+    itemMap AliceBag = Alice.getBag();
+    QList<item> AliceBagItems = AliceBag.keys();
+    foreach(item i, AliceBagItems)
+        ui->listWidget_AliceBag->addItem(AliceBag[i].to_str() + "x " + i.name + " (" + i.price.to_str() + " ₽)\n");
+}
+
+void MainWindow::refreshBobBag()
+{
+    ui->listWidget_BobBag->clear();
+    itemMap BobBag = Bob.getBag();
+    QList<item> BobBagItems = BobBag.keys();
+    foreach(item i, BobBagItems)
+        ui->listWidget_BobBag->addItem(BobBag[i].to_str() + "x " + i.name + " (" + i.price.to_str() + " ₽)\n");
+}
+
+void MainWindow::refreshBobTradeBag()
+{
+    ui->listWidget_BobTradeBag->clear();
+    itemMap BobTradeBag = Bob.getTradeBag();
+    QList<item> BobTradeBagItems = BobTradeBag.keys();
+    foreach(item i, BobTradeBagItems)
+        ui->listWidget_BobTradeBag->addItem(BobTradeBag[i].to_str() + "x " + i.name + " (" + i.price.to_str() + " ₽)\n");
+}
 
 void MainWindow::refreshAliceBalance()
 {
@@ -48,10 +95,7 @@ void MainWindow::refreshBobBalance()
     ui->label_BobValue->setText( Bob.balance().to_str() + " ₽" );
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+
 
 void MainWindow::on_pushButton_banknote_sign_clicked()
 {
@@ -110,13 +154,6 @@ void MainWindow::refreshSpended()
     foreach(N i, spendedList)
         ui->listWidget_bank_spended->addItem(i.to_str());
 }
-void MainWindow::refreshAliceWallet()
-{
-    ui->listWidget_AliceWallet->clear();
-    QList<banknote> banknotesList = Alice.getWallet().values();
-    foreach(banknote i, banknotesList)
-        ui->listWidget_AliceWallet->addItem(i.serial.to_str());
-}
 
 void MainWindow::refreshKeys()
 {
@@ -145,13 +182,6 @@ void MainWindow::logWrite(QString text)
     ui->textEdit->moveCursor(QTextCursor::End);
     ui->textEdit->insertPlainText(text);
     ui->textEdit->moveCursor(QTextCursor::End);
-}
-
-void MainWindow::say(QString text)
-{
-    ui->textEdit_protocol->moveCursor(QTextCursor::End);
-    ui->textEdit_protocol->insertPlainText(text);
-    ui->textEdit_protocol->moveCursor(QTextCursor::End);
 }
 
 void MainWindow::on_pushButton_keygen_clicked()

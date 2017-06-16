@@ -3,6 +3,80 @@
 #include "rsa.h"
 #include "rsa-cash.h"
 
+void human::tradeBanknote(N serial)
+{
+    if(wallet.contains(serial))
+    {
+        if(trade_wallet.contains(serial))
+            say(name + ": Эта банкнота уже выбрана для оплаты. Я не могу использовать две одинаковых банкноты в одном платеже.\n", color);
+        else
+            trade_wallet[serial] = wallet[serial];
+    } //Это сообщение не должно вылезать при  нормальной работе программы
+    else say(name + ": Я не могу платить не существующей банкнотой.\n", color);
+}
+
+void human::untradeBanknote(N serial)
+{
+    if(trade_wallet.contains(serial))
+        if( !wallet.contains(serial) )                  //Если мы удалили банкноту из кошелька
+            wallet[serial] = trade_wallet[serial];      //Скопируем её обратно
+        trade_wallet.remove(serial);                    //Уберём банкноту из списка обмена
+    //Это сообщение не должно вылезать при  нормальной работе программы
+    else say(name + ": Я не могу убрать несуществующую банкноту.\n", color);
+}
+
+void human::addItem(item new_item)
+{
+    if(bag.contains(new_item))
+        bag[new_item] = bag[new_item] + 1;
+    else
+        bag[new_item] = 1;
+}
+
+void human::removeItem(item old_item)
+{
+    if(bag.contains(old_item))
+        if (bag[old_item] == 1)
+            bag.remove(old_item);
+        else bag[old_item] = bag[old_item] - 1;
+    //Это сообщение не должно вылезать при  нормальной работе программы
+    else say(name + ": Я не могу использовать использовать не существующий предмет.\n", color);
+}
+
+void human::tradeItem(item new_item)
+{   //Если такой предмет есть в сумке
+    if(bag.contains(new_item))
+    {
+        //Убираем предмет из сумки
+        if (bag[old_item] == 1)
+            bag.remove(old_item);
+        else bag[old_item] = bag[old_item] - 1;
+        //Кладём предмет на прилавок
+        if(trade_bag.contains(new_item))
+            trade_bag[new_item] = trade_bag[new_item] + 1;
+        else
+            trade_bag[new_item] = 1;
+    } //Это сообщение не должно вылезать при  нормальной работе программы
+    else say(name + ": Я не могу продавать не существующий предмет.\n", color);
+}
+
+void human::untradeItem(item old_item)
+{   //Если такой предмет есть на прилавке
+    if(trade_bag.contains(new_item))
+    {
+        //Убираем предмет с прилавка
+        if (trade_bag[old_item] == 1)
+            trade_bag.remove(old_item);
+        else trade_bag[old_item] = trade_bag[old_item] - 1;
+        //Кладём предмет в сумку
+        if(bag.contains(new_item))
+            bag[new_item] = bag[new_item] + 1;
+        else
+            bag[new_item] = 1;
+    } //Это сообщение не должно вылезать при  нормальной работе программы
+    else say(name + ": Я не могу перестать продавать не продающийся предмет.\n", color);
+}
+
 //Односторонняя немультипликативная функция
 N bank::hash(const N& X)
 {

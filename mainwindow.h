@@ -22,7 +22,6 @@ public:
 //---------------------------------------------------------
     void logWrite(QString text);
 
-    void say(QString text);
     void refreshKeys();
     void refreshNominals();
     void refreshEmited();
@@ -30,6 +29,11 @@ public:
     void refreshAliceWallet();
     void refreshAliceBalance();
     void refreshBobBalance();
+
+    void refreshAliceBag();
+    void refreshAliceTradeWallet();
+    void refreshBobBag();
+    void refreshBobTradeBag();
 //---------------------------------------------------------
 
 private slots:

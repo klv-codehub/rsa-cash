@@ -38,7 +38,7 @@
         <item row="1" column="0" colspan="2">
          <widget class="QTabWidget" name="tabWidget_4">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="tab_5">
            <attribute name="title">
@@ -183,7 +183,7 @@
             <item>
              <widget class="QTabWidget" name="tabWidget_3">
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="tab_2">
                <attribute name="title">
@@ -492,7 +492,7 @@
                 </widget>
                </item>
                <item row="2" column="1">
-                <widget class="QPushButton" name="pushButton_banknoteSend">
+                <widget class="QPushButton" name="pushButton_AliceTradeBanknote">
                  <property name="text">
                   <string>Использовать  в сделке</string>
                  </property>
@@ -554,7 +554,7 @@
               </attribute>
               <layout class="QVBoxLayout" name="verticalLayout_4">
                <item>
-                <widget class="QListWidget" name="listWidget"/>
+                <widget class="QListWidget" name="listWidget_AliceBag"/>
                </item>
                <item>
                 <widget class="QPushButton" name="pushButton_9">
@@ -613,9 +613,6 @@
              </item>
             </layout>
            </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QListView" name="listView"/>
-           </item>
            <item row="2" column="0">
             <widget class="QPushButton" name="pushButton_7">
              <property name="text">
@@ -629,6 +626,9 @@
               <string>Прекратить продажу</string>
              </property>
             </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QListWidget" name="listWidget_BobBag"/>
            </item>
           </layout>
          </widget>

@@ -11,7 +11,11 @@ struct banknote{
     N serial;      //Номер
     N nom;         //Номинал
     N sign;        //Подпись банка
-    bool is_spended;    //Флаг потраченности (используется только внутри кошелька)
+};
+
+struct item{
+    QString name;
+    N price;
 };
 
 
@@ -24,7 +28,7 @@ typedef QList <N> emitedSignsList;      //Поставленные подпис�
 typedef QList <N> spendedSerialsList;   //Потраченные серийники
 typedef QMap <QString, keypair> keyMap; //Имя ключевой пары и она сама
 typedef QMap <QString, N> keyNameMap;   //Номинал и имя ключа
-typedef QMap <QString, N> goodsMap;     //Название и цена товара
+typedef QMap <item, N> itemMap;     //Предмет и количество
 
 class human;
 
@@ -67,9 +71,9 @@ class human
     private:
         bank *banking;
         banknotesMap wallet;
-        goodsMap     bag;
         banknotesMap trade_wallet;
-        goodsMap     trade_bag;
+        itemMap     bag;
+        itemMap     trade_bag;
     public:
         QString name;
         QString color;
@@ -83,11 +87,18 @@ class human
 
         bool emitBanknote(N nom, N serial, N R);
         bool depositBanknote(N serial);
+        void tradeBanknote(N serial);
+        void untradeBanknote(N serial);
 
-        void addItem(QString name, N price);
-        void removeItem(QString name);
+        void addItem(item new_item);
+        void removeItem(item old_item);
+        void tradeItem(item new_item);
+        void untradeItem(item old_item);
 
-        banknotesMap getWallet()    {return wallet;}
+        banknotesMap    getWallet()        {return wallet;}
+        banknotesMap    getTradeWallet()   {return trade_wallet;}
+        itemMap        getBag()           {return bag;}
+        itemMap        getTradeBag()      {return trade_bag;}
 };
 
 
