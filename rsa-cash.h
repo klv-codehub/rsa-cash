@@ -69,9 +69,10 @@ class human
         banknotesMap wallet;
     public:
         QString name;
+        QString color;
         void sayname();
         human();
-        human(const QString label, bank &banking_service);
+        human(const QString label, const QString _color, bank &banking_service);
         N balance() const;
         bool putmoney(const N sum);
         bool takemoney(const N sum);

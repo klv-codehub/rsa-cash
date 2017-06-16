@@ -21,11 +21,15 @@ public:
     ~MainWindow();
 //---------------------------------------------------------
     void logWrite(QString text);
+
+    void say(QString text);
     void refreshKeys();
     void refreshNominals();
     void refreshEmited();
     void refreshSpended();
     void refreshAliceWallet();
+    void refreshAliceBalance();
+    void refreshBobBalance();
 //---------------------------------------------------------
 
 private slots:

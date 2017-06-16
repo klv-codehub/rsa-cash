@@ -3,6 +3,7 @@
 
 #include "common.h"
 QTextEdit *DebugPrintQTE = NULL;
+QTextEdit *ProtocolPrintQTE = NULL;
 
 int main(int argc, char *argv[])
 {

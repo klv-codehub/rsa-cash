@@ -3,10 +3,11 @@
 
 #include <QApplication>
 #include <QTextEdit>
-#include <string>
 
 extern QTextEdit *DebugPrintQTE;
+extern QTextEdit *ProtocolPrintQTE;
 
 bool dprint(QString);
+bool say(QString text, QString color);
 
 #endif // DEBUG_H

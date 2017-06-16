@@ -6,14 +6,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QMainWindow::showMaximized();
+
     extern QTextEdit *DebugPrintQTE;
     DebugPrintQTE = ui->textEdit;
-    Alice = {"Alice", sber};
-    Bob = {"Bob", sber};
+    extern QTextEdit *ProtocolPrintQTE;
+    ProtocolPrintQTE = ui->textEdit_protocol;
+
+    Alice = {"Alice", "green", sber};
+    Bob = {"Bob", "blue", sber};
     sber.register_client(&Alice);   //Из-за странного бага с this в конструкторе
     sber.register_client(&Bob);     //Регистрацию в банке проводим здесь
-    ui->label_BobValue->setText( Bob.balance().to_str() );
-    ui->label_AliceValue->setText( Alice.balance().to_str() );
+    refreshAliceBalance();
+    refreshBobBalance();
 
     keypair t;
     t.n = 143;
@@ -32,6 +37,17 @@ MainWindow::MainWindow(QWidget *parent) :
     refreshKeys();
 }
 
+
+void MainWindow::refreshAliceBalance()
+{
+    ui->label_AliceValue->setText( Alice.balance().to_str() + " ₽" );
+}
+
+void MainWindow::refreshBobBalance()
+{
+    ui->label_BobValue->setText( Bob.balance().to_str() + " ₽" );
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -43,7 +59,7 @@ void MainWindow::on_pushButton_banknote_sign_clicked()
                        ui->lineEdit_banknote_serial->text(),
                        ui->lineEdit_banknote_R->text());
     refreshAliceWallet();
-    ui->label_AliceValue->setText( Alice.balance().to_str() );
+    refreshAliceBalance();
     refreshEmited();
 }
 
@@ -61,7 +77,7 @@ void MainWindow::on_pushButton_AliceDeposit_clicked()
         Alice.depositBanknote(serial);
 
         refreshAliceWallet();
-        ui->label_AliceValue->setText( Alice.balance().to_str() );
+        refreshAliceBalance();
         refreshSpended();
     }
 }
@@ -76,8 +92,6 @@ void MainWindow::on_pushButton_bank_nom_forget_clicked()
 
         sber.removeCurrency(currencyKeyName);
         refreshNominals();
-
-        dprint("Банк: Я больше не принимаю номинал '" + nom.to_str() + "' по ключу '" + currencyKeyName + "'.\n");
     }
 }
 
@@ -123,7 +137,7 @@ void MainWindow::refreshNominals()
 
 void MainWindow::on_pushButton_clicked()
 {
-
+    DebugPrintQTE->clear();
 }
 
 void MainWindow::logWrite(QString text)
@@ -133,6 +147,12 @@ void MainWindow::logWrite(QString text)
     ui->textEdit->moveCursor(QTextCursor::End);
 }
 
+void MainWindow::say(QString text)
+{
+    ui->textEdit_protocol->moveCursor(QTextCursor::End);
+    ui->textEdit_protocol->insertPlainText(text);
+    ui->textEdit_protocol->moveCursor(QTextCursor::End);
+}
 
 void MainWindow::on_pushButton_keygen_clicked()
 {
@@ -202,25 +222,25 @@ void MainWindow::on_pushButton_sign_copy_result_clicked()
 void MainWindow::on_pushButton_Alice_putmoney_clicked()
 {
     Alice.putmoney(ui->lineEdit_Alice_money->text());
-    ui->label_AliceValue->setText( Alice.balance().to_str() );
+    refreshAliceBalance();
 }
 
 void MainWindow::on_pushButton_Alice_takemoney_clicked()
 {
     Alice.takemoney(ui->lineEdit_Alice_money->text());
-    ui->label_AliceValue->setText( Alice.balance().to_str() );
+    refreshAliceBalance();
 }
 
 void MainWindow::on_pushButton_Bob_putmoney_clicked()
 {
     Bob.putmoney(ui->lineEdit_Bob_money->text());
-    ui->label_BobValue->setText( Bob.balance().to_str() );
+    refreshBobBalance();
 }
 
 void MainWindow::on_pushButton_Bob_takemoney_clicked()
 {
     Bob.takemoney(ui->lineEdit_Bob_money->text());
-    ui->label_BobValue->setText( Bob.balance().to_str() );
+    refreshBobBalance();
 }
 
 void MainWindow::on_pushButton_bank_addcurrency_clicked()
@@ -246,7 +266,6 @@ void MainWindow::on_pushButton_bank_emited_forget_clicked()
         N sign = ui->listWidget_bank_emited->currentItem()->text();
         sber.removeEmitedSignFromList(sign);
         refreshEmited();
-        dprint("Банк: Подпись '" + sign.to_str() + "' удалена из реестра.\n");
     }
 }
 
@@ -254,9 +273,8 @@ void MainWindow::on_pushButton_spended_forget_clicked()
 {
     if(!ui->listWidget_bank_spended->selectedItems().isEmpty())
     {
-        N sign = ui->listWidget_bank_spended->currentItem()->text();
-        sber.removeSpendedSerialFromList(sign);
+        N serial = ui->listWidget_bank_spended->currentItem()->text();
+        sber.removeSpendedSerialFromList(serial);
         refreshSpended();
-        dprint("Банк: Серийный номер '" + sign.to_str() + "' удалён из реестра.\n");
     }
 }
