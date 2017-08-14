@@ -1,5 +1,4 @@
-#include "common.h"
-#include "nclass.h"
+#include "integers.h"
 #include "rsa.h"
 
 N rsa_encrypt(const N& num, const public_key& key)

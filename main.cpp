@@ -1,7 +1,7 @@
-#include "mainwindow.h"
+#include "gui_mainwindow.h"
 #include <QApplication>
 
-#include "common.h"
+#include "print.h"
 QTextEdit *DebugPrintQTE = NULL;
 QTextEdit *ProtocolPrintQTE = NULL;
 

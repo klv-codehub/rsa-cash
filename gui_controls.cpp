@@ -1,5 +1,7 @@
-#include "mainwindow.h"
+#include "gui_mainwindow.h"
 #include "ui_mainwindow.h"
+
+#include "print.h"
 
 void MainWindow::on_pushButton_banknote_sign_clicked()
 {
@@ -92,7 +94,7 @@ void MainWindow::on_pushButton_bank_addcurrency_clicked()
     refreshNominals();
 }
 
-void MainWindow::on_comboBox_keypair_choose_currentIndexChanged(int index)
+void MainWindow::on_comboBox_keypair_choose_currentIndexChanged()
 {
     QString currentKeyName = ui->comboBox_keypair_choose->currentText();
     ui->lineEdit_bank_N->setText(keyStorage[currentKeyName].n.to_str());

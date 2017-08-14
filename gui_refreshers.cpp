@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "gui_mainwindow.h"
 #include "ui_mainwindow.h"
 
 void MainWindow::refreshAliceWalletPrice()

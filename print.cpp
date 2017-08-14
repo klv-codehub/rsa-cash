@@ -1,4 +1,4 @@
-#include "debug.h"
+#include "print.h"
 
 bool dprint(QString text)
 {

@@ -1,6 +1,9 @@
 #ifndef NCLASS_H
 #define NCLASS_H
 
+#include <QVector>
+typedef 	QVector	<unsigned char> 	byte_vector;
+
 class N
 {
     private:

@@ -24,19 +24,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES +=  main.cpp \
-        mainwindow.cpp \
-        nclass.cpp \
         rsa.cpp \
-    debug.cpp \
-    rsa-cash.cpp \
-    view.cpp \
-    controller.cpp
+    print.cpp \
+    integers.cpp \
+    gui_mainwindow.cpp \
+    gui_refreshers.cpp \
+    gui_controls.cpp \
+    actor_human.cpp \
+    actor_bank.cpp
 
-HEADERS  += mainwindow.h \
-        nclass.h \
-        common.h \
+HEADERS  += \
         rsa.h \
-    debug.h \
-    rsa-cash.h
+    print.h \
+    integers.h \
+    gui_mainwindow.h \
+    human.h \
+    actors.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES += \
+    2do.txt

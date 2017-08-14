@@ -1,5 +1,5 @@
-#include "common.h"
-#include "nclass.h"
+#include "integers.h"
+#include "print.h"
 
 N::N()
 {
@@ -18,13 +18,17 @@ N::N(int a)
 }
 N::N(QString str)
 {
-    digit.push_back(0);
-    for(int i = str.length() - 1; i >=0 ; i--)
+    int i = 0;
+    while(i < str.length())
+    {
         if('0' <= str[i] && str[i] <= '9')
-            digit.push_back(str[i].digitValue());// -'0'
-    if (digit.size() > 1) {
-        digit.erase(digit.begin());
+            if( !(digit.size() == 0 && str[i] == '0') ) //Не читаем ведущие нули
+                digit.insert(digit.begin(), str[i].digitValue());// -'0'
+        i++;
     }
+
+    if (digit.size() == 0)
+        digit.insert(digit.begin(), 0);
 }
 QString N::to_str() const
 {
@@ -143,7 +147,7 @@ void N::mul10k (int k)
         return;
     }
     for (int i = 0; i < k; i++) {
-        this->digit.emplace(this->digit.begin(), 0);
+        this->digit.insert(this->digit.begin(), 0);
     }
 }
 //умножение на цифру
@@ -276,8 +280,8 @@ N N::revmod(const N mod) const
         q = a/b;
         a = a-b*q;
         Va = Va-Vb*q;
-        swap(a,b);
-        swap(Va, Vb);
+        qSwap(a,b);
+        qSwap(Va, Vb);
     }
 
     if(a == 1)//НОД должен быть равен 1 для существования обратного
