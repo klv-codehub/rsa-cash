@@ -14,12 +14,14 @@ class N
         byte_vector digit;
     public:
         N();
-        N(int);
-        N(const QString);
+        N(int);             //Здесь модификатор const не нужен, поскольку int - элементарный тип и он просто копируется
+        N(const QString);   //А здесь передача по ссылке приводит к проблемам с инициализацией строковым литералом
+                            //Но модификатор const возможно поможет компилятору оптимизировать копирование аргумента
 
         QString to_str() const;
         QString to_binstr() const;
         QByteArray to_bytearray() const;
+        QByteArray from_bytearray(const QByteArray);
 
         N powmod(const N pow, const N mod) const;
         N revmod(const N mod) const;

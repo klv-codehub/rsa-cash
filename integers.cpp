@@ -16,7 +16,7 @@ N::N(int a)
     }
     while(a > 0);
 }
-N::N(QString str)
+N::N(const QString str)
 {
     int i = 0;
     while(i < str.length())
@@ -225,26 +225,18 @@ N operator % (const N& a, const N& b)
 //перевод в двоичную строку
 QString N::to_binstr() const
 {
-    dprint("BINSTR started\n");
-    QString t, nstr;
-    N tmp = *this, ntmp;
-    while (tmp > 2 || tmp == 2) {
-        ntmp = (tmp % 2);
-        t += ntmp.digit[0] + '0';
-        tmp = tmp / 2;
+    QString bin_str;
+    N div = *this, rem;
+    while (div != 0) {
+        rem = div % 2;
+        div = div / 2;
+        bin_str.insert(0, rem.digit[0] + '0');  //fixme?
     }
-    t += tmp.digit[0] + '0';
-    /*
-     * Символы в строке хранятся в обратном порядке, т.е. если число не 0, первый символ всегда '1'
-     */
-    for (int i = t.length() - 1; i >= 0; i--) {
-        nstr += t[i];
-    }
-    dprint("BINSTR ended\n");
-    return nstr;
+
+    return bin_str;
 }
 
-//Перевод длинного числа в массив байтов big-endian
+//Перевод длинного числа в двоичную СС в массив байтов big-endian
 QByteArray N::to_bytearray() const
 {
     QByteArray bin_array;
@@ -264,7 +256,7 @@ QByteArray N::to_bytearray() const
             bit++;                      //Идём к следующему биту в формируемом байте
         }
 
-        //bin_array.insert(bin_array.length(), byte);      //(Little endian) Вставляем очередной сформированный байт в начало массива
+        //bin_array.insert(bin_array.length(), byte);      //(Little endian) Вставляем очередной сформированный байт в конец массива
         bin_array.insert(0, byte);      //(Big endian) Вставляем очередной сформированный байт в начало массива
     }
 
