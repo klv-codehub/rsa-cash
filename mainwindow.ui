@@ -40,7 +40,7 @@
            <item row="0" column="0">
             <widget class="QTabWidget" name="tabWidget_5">
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="tab_7">
               <attribute name="title">
@@ -183,7 +183,7 @@
                 <widget class="QListWidget" name="listWidget_AliceBag"/>
                </item>
                <item row="2" column="0">
-                <widget class="QPushButton" name="pushButton_9">
+                <widget class="QPushButton" name="pushButton_AliceUseItem">
                  <property name="text">
                   <string>Использовать предмет</string>
                  </property>
@@ -199,7 +199,7 @@
         <item row="1" column="0" colspan="2">
          <widget class="QTabWidget" name="tabWidget_4">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="tab_5">
            <attribute name="title">

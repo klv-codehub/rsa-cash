@@ -78,6 +78,10 @@ private slots:
     void on_pushButton_BobTradeItem_clicked();
     void on_pushButton_BobUntradeItem_clicked();
 
+    void on_pushButton_exchange_clicked();
+
+    void on_pushButton_AliceUseItem_clicked();
+
 private:
     Ui::MainWindow *ui;
 //---------------------------------------------------------

@@ -10,9 +10,14 @@ emitedSignsList     bank::getEmitedSignsList()      {return emitedList;}
 spendedSerialsList  bank::getSpendedSerialsList()   {return spendedList;}
 
 //Односторонняя немультипликативная функция
+#include <QCryptographicHash>
 N bank::hash(const N& X)
-{
+{   
     return X;//Пока что здесь стоит заглушка - функция Y=X
+//    return N::from_bytearray(
+//                QCryptographicHash::hash(
+//                    X.to_bytearray(),
+//                    QCryptographicHash::Md5));
 }
 
 //Возвращает подпись (F(k)*(r^e mod n))^d mod n

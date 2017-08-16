@@ -108,15 +108,17 @@ class human
         void makeoffer(human *seller);
         void takeoffer(human  *buyer, banknotesMap trade_wallet);
 
+        void sendTradeBag(human &reciever);
+
         banknotesMap   getWallet()        ;// {return wallet;}
         banknotesMap   getTradeWallet()   ;// {return trade_wallet;}
         itemMap        getBag()           ;// {return bag;}
         itemMap        getTradeBag()      ;// {return trade_bag;}
 
-        N   getWalletPrice();
-        N   getTradeWalletPrice();
-        N   getBagPrice();
-        N   getTradeBagPrice();
+        N   getWalletPrice() const;
+        N   getTradeWalletPrice() const;
+        N   getBagPrice() const;
+        N   getTradeBagPrice() const;
 };
 
 #endif // BANK_H

@@ -38,7 +38,6 @@ HEADERS  += \
     print.h \
     integers.h \
     gui_mainwindow.h \
-    human.h \
     actors.h
 
 FORMS    += mainwindow.ui

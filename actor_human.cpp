@@ -8,6 +8,19 @@ banknotesMap   human::getTradeWallet()   {return trade_wallet;}
 itemMap        human::getBag()           {return bag;}
 itemMap        human::getTradeBag()      {return trade_bag;}
 
+void human::sendTradeBag(human& reciever)
+{
+    QList<item> tradeBagItems = trade_bag.keys();
+        foreach(item itm, tradeBagItems)
+        {
+            while(trade_bag.contains(itm))
+            {
+                reciever.addItem(itm);
+                untradeItem(itm);
+            }
+        }
+}
+
 bool operator< (const item& A, const item& B)
 {
     if(A.name < B.name) return true;
@@ -17,7 +30,7 @@ bool operator< (const item& A, const item& B)
    // return (A.name != B.name  A.price != B.price) ? true:false;//WTF is here
 }
 
-N   human::getWalletPrice()
+N   human::getWalletPrice() const
 {
     N price = 0;
     foreach(banknote i, wallet)
@@ -25,7 +38,7 @@ N   human::getWalletPrice()
     return price;
 }
 
-N   human::getTradeWalletPrice()
+N   human::getTradeWalletPrice() const
 {
     N price = 0;
     foreach(banknote i, trade_wallet)
@@ -33,7 +46,7 @@ N   human::getTradeWalletPrice()
     return price;
 }
 
-N   human::getBagPrice()
+N   human::getBagPrice() const
 {
     N price = 0;
     foreach(item i, bag.keys())
@@ -41,7 +54,7 @@ N   human::getBagPrice()
     return price;
 }
 
-N   human::getTradeBagPrice()
+N   human::getTradeBagPrice() const
 {
     N price = 0;
     foreach(item i, trade_bag.keys())

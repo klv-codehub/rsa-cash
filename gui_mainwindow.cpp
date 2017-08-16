@@ -111,9 +111,9 @@ void MainWindow::on_pushButton_BobRemoveItem_clicked()
         selected.price = itemText;
 
         Bob.removeItem(selected);
+        refreshBobBag();
+        refreshBobBagPrice();
     }
-    refreshBobBag();
-    refreshBobBagPrice();
 }
 
 void MainWindow::on_pushButton_BobTradeItem_clicked()
@@ -132,11 +132,11 @@ void MainWindow::on_pushButton_BobTradeItem_clicked()
         selected.price = itemText;
 
         Bob.tradeItem(selected);
+        refreshBobBag();
+        refreshBobTradeBag();
+        refreshBobBagPrice();
+        refreshBobTradeBagPrice();
     }
-    refreshBobBag();
-    refreshBobTradeBag();
-    refreshBobBagPrice();
-    refreshBobTradeBagPrice();
 }
 
 void MainWindow::on_pushButton_BobUntradeItem_clicked()
@@ -155,9 +155,39 @@ void MainWindow::on_pushButton_BobUntradeItem_clicked()
         selected.price = itemText;
 
         Bob.untradeItem(selected);
+        refreshBobBag();
+        refreshBobTradeBag();
+        refreshBobBagPrice();
+        refreshBobTradeBagPrice();
     }
-    refreshBobBag();
+}
+
+void MainWindow::on_pushButton_exchange_clicked()
+{
+    Bob.sendTradeBag(Alice);
     refreshBobTradeBag();
-    refreshBobBagPrice();
     refreshBobTradeBagPrice();
+    refreshAliceBag();
+    refreshAliceBagPrice();
+}
+
+void MainWindow::on_pushButton_AliceUseItem_clicked()
+{
+    if(!ui->listWidget_AliceBag->selectedItems().isEmpty())
+    {
+        item selected;
+        QString itemText = ui->listWidget_AliceBag->currentItem()->text();
+
+        selected.name = itemText;
+        selected.name.remove(0, selected.name.indexOf('x') + 2);
+        selected.name.remove(selected.name.lastIndexOf('(') - 1, selected.name.length());
+
+        itemText.remove(0, itemText.lastIndexOf('(') + 1);
+        itemText.remove(itemText.indexOf(' '), itemText.length());
+        selected.price = itemText;
+
+        Alice.removeItem(selected);
+        refreshAliceBag();
+        refreshAliceBagPrice();
+    }
 }
