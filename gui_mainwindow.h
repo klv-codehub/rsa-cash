@@ -62,7 +62,7 @@ private slots:
 
     void on_pushButton_banknote_sign_clicked();
 
-    void on_comboBox_keypair_choose_currentIndexChanged();
+    void on_comboBox_keypair_choose_currentIndexChanged(int);
 
     void on_pushButton_bank_nom_forget_clicked();
     void on_pushButton_bank_emited_forget_clicked();

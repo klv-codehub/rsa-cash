@@ -94,7 +94,7 @@ void MainWindow::on_pushButton_bank_addcurrency_clicked()
     refreshNominals();
 }
 
-void MainWindow::on_comboBox_keypair_choose_currentIndexChanged()
+void MainWindow::on_comboBox_keypair_choose_currentIndexChanged(int)
 {
     QString currentKeyName = ui->comboBox_keypair_choose->currentText();
     ui->lineEdit_bank_N->setText(keyStorage[currentKeyName].n.to_str());

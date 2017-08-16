@@ -227,11 +227,11 @@ QString N::to_binstr() const
 {
     dprint("BINSTR started\n");
     QString t, nstr;
-    N odd = 2, tmp = *this, ntmp;
-    while (tmp > odd || tmp == odd) {
-        ntmp = (tmp % odd);
+    N tmp = *this, ntmp;
+    while (tmp > 2 || tmp == 2) {
+        ntmp = (tmp % 2);
         t += ntmp.digit[0] + '0';
-        tmp = tmp / odd;
+        tmp = tmp / 2;
     }
     t += tmp.digit[0] + '0';
     /*
@@ -242,6 +242,33 @@ QString N::to_binstr() const
     }
     dprint("BINSTR ended\n");
     return nstr;
+}
+
+//Перевод длинного числа в массив байтов big-endian
+QByteArray N::to_bytearray() const
+{
+    QByteArray bin_array;
+    N div = *this, rem; //divident, remainder
+    char byte, bit;
+
+    while (div != 0)
+    {
+        byte = bit = 0;     //Обнуляем байт и начинаем формировать его с первого с конца бита (нулевого)
+
+        while (bit != 8)    //Побайтно формируем результирующий массив
+        {
+            rem = div % 2;              //Находим очередной остаток "лесенки"
+            if(rem.digit[0] == 1)       //Если остаток от деления на 2 - еденица
+                byte = byte | 1<<bit;   //Устанавливаем в еденицу соответствующий бит
+            div = div / 2;              //Обновляем очередное делимое "лесенки
+            bit++;                      //Идём к следующему биту в формируемом байте
+        }
+
+        //bin_array.insert(bin_array.length(), byte);      //(Little endian) Вставляем очередной сформированный байт в начало массива
+        bin_array.insert(0, byte);      //(Big endian) Вставляем очередной сформированный байт в начало массива
+    }
+
+    return bin_array;
 }
 
 //возведение в степень по модулю

@@ -1,7 +1,11 @@
 #ifndef NCLASS_H
 #define NCLASS_H
 
+#include <QDebug>
+
+#include <QByteArray>
 #include <QVector>
+#include <QString>
 typedef 	QVector	<unsigned char> 	byte_vector;
 
 class N
@@ -15,7 +19,7 @@ class N
 
         QString to_str() const;
         QString to_binstr() const;
-        byte_vector to_bytevector();
+        QByteArray to_bytearray() const;
 
         N powmod(const N pow, const N mod) const;
         N revmod(const N mod) const;
