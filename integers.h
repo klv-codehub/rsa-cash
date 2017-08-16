@@ -21,7 +21,7 @@ class N
         QString to_str() const;
         QString to_binstr() const;
         QByteArray to_bytearray() const;
-        QByteArray from_bytearray(const QByteArray);
+        static N from_bytearray(const QByteArray);
 
         N powmod(const N pow, const N mod) const;
         N revmod(const N mod) const;

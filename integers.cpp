@@ -279,6 +279,18 @@ QByteArray N::to_bytearray() const
     return bin_array;
 }
 
+N N::from_bytearray(const QByteArray binary)
+{
+    N decimal;
+    N degree = 1;
+    for(int i = binary.size() - 1; i >=0; i--)
+    {
+        decimal = decimal + degree*(unsigned char)binary[i];
+        degree = degree*256;
+    }
+    return decimal;
+}
+
 //возведение в степень по модулю
 N N::powmod(const N pow, const N mod) const
 {

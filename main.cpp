@@ -12,8 +12,11 @@ QTextEdit *ProtocolPrintQTE = NULL;
 
 int main(int argc, char *argv[])
 {
-//    N a ("4276545");
-//    QByteArray b = a.to_bytearray();
+      N a ("42673456789546785646780793245678996553472546578676954747534367869706958473672635789607695847256378697-876545");
+     QByteArray b = a.to_bytearray();
+      N c = N::from_bytearray(b);
+      qDebug() << a.to_str();
+      qDebug() << c.to_str();
 
 //    QString t;
 //    for(int i = 0; b[i] != '\0'; i++)
@@ -24,9 +27,9 @@ int main(int argc, char *argv[])
 //            t+= (b[i]>>k & 1) + '0';
 //    }
 
-//    qDebug() << t;
 
-//    qDebug() << QString::fromStdString(QCryptographicHash::hash(b, QCryptographicHash::Md5).toStdString());
+    //  qDebug() << b.toHex();
+//    qDebug() << QCryptographicHash::hash(b, QCryptographicHash::Md5).toHex();
 
 
     QApplication app(argc, argv);
