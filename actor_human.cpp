@@ -191,7 +191,6 @@ bool human::emitBanknote(N nom, N serial, N R)
         say(this->name + ": Но серийный номер банкноты должен быть меньше модуля открытого ключа банка.\n", this->color);
             return false;
     }
-
         N blinded_hash = rsa_blind(banking->hash(serial), banking->getCurrencyMap()[nom], R);
         say(this->name + ": Вычисляю f(serial) * R^e mod n = '" + blinded_hash.to_str() + "' и посылаю это число банку.\n", this->color);
         banknote B;

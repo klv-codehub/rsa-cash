@@ -3,7 +3,7 @@
 
 N::N()
 {
- //   digit.push_back(0);
+    digit.push_back(0);
 }
 
 N::N(int a)
@@ -80,28 +80,42 @@ N operator + (const N& a, const N& b)
    N bigger = (a.digit.size() < b.digit.size())?b:a;
    N smaller = (a.digit.size() < b.digit.size())?a:b;
 
-   N result;
-   int sum = 0;
+//   N result;
+//   int sum = 0;
+//   for (int i = 0; i < bigger.digit.size(); i++) {
+//       if (i < smaller.digit.size()) {
+//           sum += bigger.digit[i] + smaller.digit[i];
+//       } else {
+//           sum += bigger.digit[i];
+//       }
+//       if (sum <= 9) {
+//           result.digit.push_back(sum);
+//           sum = 0;
+//       }
+//       else {
+//           result.digit.push_back(sum % 10);
+//           sum = 1;
+//           if (i == bigger.digit.size() - 1) {
+//               result.digit.push_back(sum);
+//           }
+//       }
+//   }
+   int carry = 0;
    for (int i = 0; i < bigger.digit.size(); i++) {
-       if (i < smaller.digit.size()) {
-           sum += bigger.digit[i] + smaller.digit[i];
-       } else {
-           sum += bigger.digit[i];
+       bigger.digit[i]+=carry;
+       if(i < smaller.digit.size())
+           bigger.digit[i]+=smaller.digit[i];
+       if(bigger.digit[i] > 9)
+       {
+           carry = 1;
+           bigger.digit[i]-=10;
        }
-       if (sum <= 9) {
-           result.digit.push_back(sum);
-           sum = 0;
-       }
-       else {
-           result.digit.push_back(sum % 10);
-           sum = 1;
-           if (i == bigger.digit.size() - 1) {
-               result.digit.push_back(sum);
-           }
-       }
+       else carry = 0;
    }
-   dprint(a.to_str() + " + " + b.to_str() + " = " + result.to_str() + '\n');
-   return result;
+   if(carry) bigger.digit.push_back(1);
+
+ //  dprint(a.to_str() + " + " + b.to_str() + " = " + bigger.to_str() + '\n');
+   return bigger;
 }
 
 N operator- (const N& a, const N& b)
@@ -136,7 +150,7 @@ N operator- (const N& a, const N& b)
         if (result.digit[i] != 0) return result;
         else result.digit.erase(result.digit.end() - 1);
     }
-    dprint(a.to_str() + " - " + b.to_str() + " = " + result.to_str() + '\n');
+   // dprint(a.to_str() + " - " + b.to_str() + " = " + result.to_str() + '\n');
     return result;
 }
 
@@ -194,6 +208,9 @@ N operator / (const N& a, const N& b)
     if (b == 0) throw;
     int k = a.digit.size() - b.digit.size() + 1;
     N tmp, result;
+        tmp.digit.clear();      //fixme!
+        result.digit.clear();   //fixme!
+
     tmp.digit.push_back(a.digit[a.digit.size() - 1]);
     int i;
     for (i = a.digit.size() - 2; tmp < b && i >= 0; i--) {
@@ -232,7 +249,6 @@ QString N::to_binstr() const
         div = div / 2;
         bin_str.insert(0, rem.digit[0] + '0');  //fixme?
     }
-
     return bin_str;
 }
 
@@ -271,9 +287,7 @@ N N::powmod(const N pow, const N mod) const
         res = res % mod;
         return res;
     }
-
     QString powStr = pow.to_binstr();
-
     for (int i = 1; i < powStr.length(); i++) {
         dprint(QString::number(i) + "\n");
 
@@ -284,6 +298,7 @@ N N::powmod(const N pow, const N mod) const
         res = res % mod;
     }
     dprint(this->to_str() + " ^ " + pow.to_str() + " mod " + mod.to_str() + " = " + res.to_str() + '\n');
+
     return res;
 }
 //нахождение обратного по модулю
