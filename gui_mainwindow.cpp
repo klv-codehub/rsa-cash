@@ -164,7 +164,9 @@ void MainWindow::on_pushButton_BobUntradeItem_clicked()
 
 void MainWindow::on_pushButton_exchange_clicked()
 {
-    Bob.sendTradeBag(Alice);
+    human::make_deal(Alice, Bob, sber);
+
+    refreshBobBalance();
     refreshBobTradeBag();
     refreshBobTradeBagPrice();
     refreshAliceBag();
@@ -190,4 +192,12 @@ void MainWindow::on_pushButton_AliceUseItem_clicked()
         refreshAliceBag();
         refreshAliceBagPrice();
     }
+}
+
+void MainWindow::on_pushButton_AliceDepositAllBanknotes_clicked()
+{
+    foreach(banknote i, Alice.getWallet())
+        Alice.depositBanknote(i.serial);
+    refreshAliceBalance();
+    refreshAliceWallet(); //fixme?
 }

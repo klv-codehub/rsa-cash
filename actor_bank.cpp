@@ -125,7 +125,7 @@ bool bank::removeCurrency(QString keyname)
 }
 bool bank::removeEmitedSignFromList(N sign)
 {
-    if(emitedList.removeOne(sign))
+    if(emitedList.removeOne(sign)) // fixme? why removeOne?
     {
         say("Банк: Подпись '" + sign.to_str() + "' удалена из реестра.\n", "orange");
         return true;

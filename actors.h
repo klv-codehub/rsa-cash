@@ -105,10 +105,12 @@ class human
         void tradeItem(item new_item);
         void untradeItem(item old_item);
 
-        void makeoffer(human *seller);
-        void takeoffer(human  *buyer, banknotesMap trade_wallet);
+        //void makeoffer(human *seller);
+        //void takeoffer(human  *buyer, banknotesMap trade_wallet);
 
         void sendTradeBag(human &reciever);
+
+        static void make_deal(human& buyer, human& seller, bank &banking);
 
         banknotesMap   getWallet()        ;// {return wallet;}
         banknotesMap   getTradeWallet()   ;// {return trade_wallet;}

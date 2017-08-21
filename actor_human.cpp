@@ -8,6 +8,54 @@ banknotesMap   human::getTradeWallet()   {return trade_wallet;}
 itemMap        human::getBag()           {return bag;}
 itemMap        human::getTradeBag()      {return trade_bag;}
 
+void human::make_deal(human& buyer, human& seller, bank& banking)
+{
+    if( !banking.getCurrencyMap().contains(1) )
+    {
+        say("Продавец: Я не хочу торговать, пока банк не выпустит номинал в 1₽.\n", seller.color);
+        say("Продавец: Вдруг я не смогу отдать сдачу?\n", seller.color);
+        return;
+    }
+
+    N money_incomed, money_cashed, money_failed;
+
+    banknotesMap buyerWallet = buyer.getTradeWallet();
+
+    foreach (banknote i, buyerWallet) {
+        money_incomed = money_incomed + i.nom;
+        if(banking.depositBanknote(&seller, i))
+            money_cashed = money_cashed + i.nom;
+    }
+
+    money_failed = money_incomed - money_cashed;
+
+    N money_price = seller.getTradeBagPrice();
+
+
+    say("Продавец: Принятая сумма: " + money_incomed.to_str() + "₽\n", seller.color);
+    say("Продавец: Не успешно: " + money_failed.to_str() + "₽\n", seller.color);
+    say("Продавец: Успешно: " + money_cashed.to_str() + "₽\n", seller.color);
+    say("Продавец: Цена товаров: " + money_price.to_str() + "₽\n", seller.color);
+
+    N money_change;
+    if(money_incomed < money_price)
+    {
+        money_change = money_incomed;
+        say("Продавец: Мне дали недостаточно денег. Я отказываюсь от сделки и возвращаю полученные деньги!\n", seller.color);
+
+    }
+    else
+    {
+        money_change = money_cashed - money_price;
+        say("Продавец: Я согласен на сделку. ", seller.color);
+        if(money_change > 0)
+            say("Сдача: " + money_change.to_str() + "₽\n", seller.color);
+        else
+            say("Сдача не нужна.\n", seller.color);
+        seller.sendTradeBag(buyer);
+    }
+}
+
 void human::sendTradeBag(human& reciever)
 {
     QList<item> tradeBagItems = trade_bag.keys();
@@ -17,6 +65,7 @@ void human::sendTradeBag(human& reciever)
             {
                 reciever.addItem(itm);
                 untradeItem(itm);
+                removeItem(itm);
             }
         }
 }

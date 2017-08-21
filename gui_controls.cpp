@@ -24,7 +24,7 @@ void MainWindow::on_pushButton_AliceRemoveBanknote_clicked()
         Alice.removeBanknote(serial);
 
         refreshAliceWallet();
-        refreshAliceBalance();
+        refreshAliceBalance(); //fixme?
         refreshSpended();
     }
 }
