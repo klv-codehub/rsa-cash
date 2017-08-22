@@ -59,7 +59,7 @@
                  <item row="0" column="1">
                   <widget class="QLineEdit" name="lineEdit_banknote_nom">
                    <property name="text">
-                    <string>50</string>
+                    <string>1</string>
                    </property>
                   </widget>
                  </item>
@@ -215,7 +215,7 @@
         <item row="1" column="0" colspan="2">
          <widget class="QTabWidget" name="tabWidget_4">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_5">
            <attribute name="title">
@@ -458,7 +458,7 @@
                 <item row="0" column="1" colspan="2">
                  <widget class="QLineEdit" name="lineEdit_bank_nom">
                   <property name="text">
-                   <string>50</string>
+                   <string>1</string>
                   </property>
                  </widget>
                 </item>

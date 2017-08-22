@@ -43,6 +43,11 @@ N::N(const QString str)
     if (digit.size() == 0)
         digit.insert(digit.begin(), 0);
 }
+
+//Делегирующий конструктор для строковых литералов
+N::N(const char* str) : N((const QString)str) {};
+
+
 QString N::to_str() const
 {
     QString t;
@@ -211,7 +216,7 @@ N operator * (const N& a, const N& b)
         result = result + tmp;
         tmp = bigger;
     }
-    dprint(a.to_str() + " * " + b.to_str() + " = " + result.to_str() + '\n');
+   // dprint(a.to_str() + " * " + b.to_str() + " = " + result.to_str() + '\n');
     return result;
 }
 
@@ -240,7 +245,7 @@ N operator / (const N& a, const N& b)
             tmp.digit.insert(tmp.digit.begin(), a.digit[i--]);
         } else break;
     }
-    dprint(a.to_str() + " / " + b.to_str() + " = " + result.to_str() + '\n');
+   // dprint(a.to_str() + " / " + b.to_str() + " = " + result.to_str() + '\n');
     return result;
 }
 
@@ -248,7 +253,7 @@ N operator / (const N& a, const N& b)
 N operator % (const N& a, const N& b)
 {
     N result = a - (a/b)*b;
-    dprint(a.to_str() + " % " + b.to_str() + " = " + result.to_str() + '\n');
+   // dprint(a.to_str() + " % " + b.to_str() + " = " + result.to_str() + '\n');
     return result ; //Для ускорения можно реализовать как изменённое целочисленное деление
 }
 
@@ -312,7 +317,7 @@ N N::powmod(const N pow, const N mod) const
     }
     QString powStr = pow.to_binstr();
     for (int i = 1; i < powStr.length(); i++) {
-        dprint(QString::number(i) + "\n");
+        //dprint(QString::number(i) + "\n");
 
         res = res * res;
         if (powStr[i] == '1') {
@@ -320,7 +325,7 @@ N N::powmod(const N pow, const N mod) const
         }
         res = res % mod;
     }
-    dprint(this->to_str() + " ^ " + pow.to_str() + " mod " + mod.to_str() + " = " + res.to_str() + '\n');
+  //  dprint(this->to_str() + " ^ " + pow.to_str() + " mod " + mod.to_str() + " = " + res.to_str() + '\n');
 
     return res;
 }
@@ -330,7 +335,7 @@ N N::revmod(const N mod) const
     N a = *this, b = mod, q, result;
     Z Va = 1, Vb = 0;
 
-    dprint('\n' + a.to_str() + ' ' + mod.to_str() + '\n');
+   // dprint('\n' + a.to_str() + ' ' + mod.to_str() + '\n');
 
     while(b!=0)
     {
@@ -345,7 +350,7 @@ N N::revmod(const N mod) const
         if(Va < 0) result = (Va + mod).abs();
         else result = Va.abs();
     else result = 0;
-    dprint(this->to_str() + " = 1/" + result.to_str() + " mod " + mod.to_str() + '\n');
+   // dprint(this->to_str() + " = 1/" + result.to_str() + " mod " + mod.to_str() + '\n');
     return result;
 }
 

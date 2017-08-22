@@ -54,6 +54,27 @@ void human::make_deal(human& buyer, human& seller, bank& banking)
             say("Сдача не нужна.\n", seller.color);
         seller.sendTradeBag(buyer);
     }
+
+    //Согласно документации Qt, гарантированно отсортирован по возрастанию
+    QList <N> nomlist = banking.getCurrencyMap().keys();
+    QList<N>::iterator i = nomlist.end();
+    QVector<N> change_noms;
+
+    while(money_change > 0)
+    {
+
+        i--;
+        while( money_change > *i || money_change == *i)
+        {
+            change_noms.insert(0, *i);
+            money_change = money_change - *i;
+        }
+
+    }
+
+    foreach (N i, change_noms) {
+        qDebug() << i.to_str();
+    }
 }
 
 void human::sendTradeBag(human& reciever)
