@@ -6,6 +6,8 @@
 #include <string>
 #include "integers.h"
 
+#include <QDateTime>
+
 #include "print.h"
 QTextEdit *DebugPrintQTE = NULL;
 QTextEdit *ProtocolPrintQTE = NULL;
@@ -20,7 +22,12 @@ N hash(const N& X)
 
 int main(int argc, char *argv[])
 {
-      qDebug() << hash(65).to_str();
+    N cap("92345678976543213456789765432134567890876543245678909876543234");
+    qsrand(QDateTime::currentDateTime().toTime_t());
+    for(int i = 0; i < 10; i++)
+         qDebug() << N::getRandomNumberLessThan(cap).to_str();
+
+ //     qDebug() << hash(65).to_str();
 //    QString t;
 //    for(int i = 0; b[i] != '\0'; i++)
 //    {

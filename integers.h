@@ -23,6 +23,8 @@ class N
         QByteArray to_bytearray() const;
         static N from_bytearray(const QByteArray);
 
+        static N getRandomNumberLessThan(const N& max);
+
         N powmod(const N pow, const N mod) const;
         N revmod(const N mod) const;
 

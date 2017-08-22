@@ -6,6 +6,34 @@ N::N()
     digit.push_back(0);
 }
 
+//N N::getRandomNumberLessThan(const N& max)
+//{
+//    QByteArray max_btarr = max.to_bytearray();
+
+//    QByteArray random_btarr;
+
+//    for(int i = 0; i < max_btarr.length() - 1; i++)
+//        random_btarr.append(qrand() % 256);
+
+//    random_btarr.insert(0, qrand() % (uchar)max_btarr[0]);
+
+//    return N::from_bytearray(random_btarr);
+//}
+
+
+//Функция для генерации случайного длинного числа меньше заданного предела
+//Алгоритм предельно простой, можно ускорить его, не используя деление с остатком
+N N::getRandomNumberLessThan(const N& max)
+{
+    int gen_length = max.to_bytearray().length();   //Выясняем длину N генерируемого случайного числа с точностью до байта
+
+    QByteArray random_btarr;
+    for(int i = 0; i < gen_length; i++)
+        random_btarr.append(qrand() % 256);         //Генерируем массив из N случайных байт
+
+    return N::from_bytearray(random_btarr) % max;   //Делаем из него длинное целое десятичное число и делим с остатком на верхний порог
+}
+
 N::N(int a)
 {
     if(a<0) a*= -1;
