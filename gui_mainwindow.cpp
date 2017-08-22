@@ -201,3 +201,11 @@ void MainWindow::on_pushButton_AliceDepositAllBanknotes_clicked()
     refreshAliceBalance();
     refreshAliceWallet(); //fixme?
 }
+
+void MainWindow::on_pushButton_AliceEmitRandomBanknote_clicked()
+{
+    Alice.emitRandomBanknote( ui->lineEdit_banknote_nom->text() );
+    refreshAliceWallet();
+    refreshAliceBalance();
+    refreshEmited();
+}

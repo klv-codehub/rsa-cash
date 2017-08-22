@@ -84,6 +84,8 @@ private slots:
 
     void on_pushButton_AliceDepositAllBanknotes_clicked();
 
+    void on_pushButton_AliceEmitRandomBanknote_clicked();
+
 private:
     Ui::MainWindow *ui;
 //---------------------------------------------------------

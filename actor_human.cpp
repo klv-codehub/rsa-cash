@@ -281,6 +281,14 @@ bool human::emitBanknote(N nom, N serial, N R)
     return false;
 }
 
+bool human::emitRandomBanknote(N nom)
+{
+    N nom_public_key_module = banking->getCurrencyMap()[nom].n;
+    N serial = N::getRandomNumberLessThan(nom_public_key_module);
+    N R = N::getRandomNumberLessThan(nom_public_key_module);
+    return emitBanknote(nom, serial, R);
+}
+
 bool human::depositBanknote(N serial)
 {
     say(this->name + ": Хочу положить на свой счёт банкноту с серийным номером '" + serial.to_str() + "'.\n", this->color);

@@ -94,6 +94,8 @@ class human
         bool takemoney(const N sum);
 
         bool emitBanknote(N nom, N serial, N R);
+        bool emitRandomBanknote(N nom);
+
         bool depositBanknote(N serial);
         bool removeBanknote(N serial);
 
