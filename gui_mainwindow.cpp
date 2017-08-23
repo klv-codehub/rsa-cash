@@ -180,6 +180,10 @@ void MainWindow::on_pushButton_exchange_clicked()
     refreshBobTradeBagPrice();
     refreshAliceBag();
     refreshAliceBagPrice();
+    refreshAliceTradeWallet();
+    refreshAliceTradeWalletPrice();
+    refreshEmited();
+    refreshSpended();
 }
 
 void MainWindow::on_pushButton_AliceUseItem_clicked()
@@ -209,11 +213,12 @@ void MainWindow::on_pushButton_AliceDepositAllBanknotes_clicked()
         Alice.depositBanknote(i.serial);
     refreshAliceBalance();
     refreshAliceWallet(); //fixme?
+    refreshSpended();
 }
 
 void MainWindow::on_pushButton_AliceEmitRandomBanknote_clicked()
 {
-    Alice.emitRandomBanknote( ui->lineEdit_banknote_nom->text() );
+    Alice.takeBanknoteToWallet( Alice.emitRandomBanknote( ui->lineEdit_banknote_nom->text() ));
     refreshAliceWallet();
     refreshAliceBalance();
     refreshEmited();

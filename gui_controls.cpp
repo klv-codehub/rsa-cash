@@ -5,9 +5,10 @@
 
 void MainWindow::on_pushButton_banknote_sign_clicked()
 {
+    Alice.takeBanknoteToWallet(
     Alice.emitBanknote(ui->lineEdit_banknote_nom->text(),
                        ui->lineEdit_banknote_serial->text(),
-                       ui->lineEdit_banknote_R->text());
+                       ui->lineEdit_banknote_R->text()));
     refreshAliceWallet();
     refreshAliceBalance();
     refreshEmited();
@@ -25,7 +26,7 @@ void MainWindow::on_pushButton_AliceRemoveBanknote_clicked()
 
         refreshAliceWallet();
         refreshAliceBalance(); //fixme?
-        refreshSpended();
+        refreshSpended(); //fixme?
     }
 }
 

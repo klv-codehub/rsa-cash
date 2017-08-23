@@ -93,8 +93,8 @@ class human
         bool putmoney(const N sum);
         bool takemoney(const N sum);
 
-        bool emitBanknote(N nom, N serial, N R);
-        bool emitRandomBanknote(N nom);
+        banknote emitBanknote(N nom, N serial, N R);
+        banknote emitRandomBanknote(N nom);
 
         bool depositBanknote(N serial);
         bool removeBanknote(N serial);
@@ -107,10 +107,11 @@ class human
         void tradeItem(item new_item);
         void untradeItem(item old_item);
 
-        //void makeoffer(human *seller);
-        //void takeoffer(human  *buyer, banknotesMap trade_wallet);
+        void takeBanknoteToTradeWallet(const banknote& b);
+        void takeBanknoteToWallet(const banknote& b);
 
-        void sendTradeBag(human &reciever);
+        void sendTradeBagTo(human& reciever);     // Giver TradeBag    => MOVE => reciever Bag
+        void sendTradeWalletTo(human& reciever);  // Giver TradeWallet => COPY => reciever TradeWallet
 
         static void make_deal(human& buyer, human& seller, bank &banking);
 

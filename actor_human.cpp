@@ -52,7 +52,7 @@ void human::make_deal(human& buyer, human& seller, bank& banking)
             say("Сдача: " + money_change.to_str() + "₽\n", seller.color);
         else
             say("Сдача не нужна.\n", seller.color);
-        seller.sendTradeBag(buyer);
+        seller.sendTradeBagTo(buyer);
     }
 
     //Согласно документации Qt, гарантированно отсортирован по возрастанию
@@ -72,12 +72,15 @@ void human::make_deal(human& buyer, human& seller, bank& banking)
 
     }
 
-    foreach (N i, change_noms) {
-        qDebug() << i.to_str();
+    foreach (N nom, change_noms) {
+        seller.takeBanknoteToTradeWallet(seller.emitRandomBanknote(nom));
     }
+
+    seller.sendTradeWalletTo(buyer);
+    seller.trade_wallet.clear();
 }
 
-void human::sendTradeBag(human& reciever)
+void human::sendTradeBagTo(human& reciever)
 {
     QList<item> tradeBagItems = trade_bag.keys();
         foreach(item itm, tradeBagItems)
@@ -89,6 +92,38 @@ void human::sendTradeBag(human& reciever)
                 removeItem(itm);
             }
         }
+}
+
+void human::takeBanknoteToWallet(const banknote& b)
+{
+    if(b.serial != 0)
+    if(wallet.contains(b.serial))
+        say("Беспредел! Мне суют банкноту с SN:" + b.serial.to_str() + ", которая у меня уже есть!\n", color);
+    else
+    {
+       // b.color = ...
+       wallet[b.serial] = b;
+    }
+}
+
+void human::takeBanknoteToTradeWallet(const banknote& b)
+{
+    if(trade_wallet.contains(b.serial))
+        say("Беспредел! Мне суют банкноту с SN:" + b.serial.to_str() + ", которая у меня уже есть!\n", color);
+    else
+    {
+       // b.color = ...
+        trade_wallet[b.serial] = b;
+    }
+}
+
+void human::sendTradeWalletTo(human& reciever)
+{
+    foreach(banknote b, trade_wallet)
+    {
+        //b.color = ...
+        reciever.takeBanknoteToTradeWallet(b);
+    }
 }
 
 bool operator< (const item& A, const item& B)
@@ -255,28 +290,30 @@ bool human::takemoney(const N sum)
     return true;
 }
 
-bool human::emitBanknote(N nom, N serial, N R)
+banknote human::emitBanknote(N nom, N serial, N R)
 {
+    banknote B;
+    B.serial = 0;
     say(this->name + ": Хочу выпустить банкноту с номиналом '" + nom.to_str()
            + "' и серийным номером '" + serial.to_str() + "'. Возьму затемняющий множитель R = " + R.to_str() + ".\n", this->color);
     if( !banking->getCurrencyMap().contains(nom) )
     {
         say(this->name + ": К сожалению, банк не выпускает банкноты с таким номиналом.\n", this->color);
-            return false;
+            return B;
     }
     if( this->wallet.contains(serial))
     {
         say(this->name + ": Но у меня уже есть банкнота с таким номером. Я могу запутаться.\n", this->color);
-            return false;
+            return B;
     }
     if( serial > banking->getCurrencyMap()[nom].n)
     {
         say(this->name + ": Но серийный номер банкноты должен быть меньше модуля открытого ключа банка.\n", this->color);
-            return false;
+            return B;
     }
         N blinded_hash = rsa_blind(banking->hash(serial), banking->getCurrencyMap()[nom], R);
         say(this->name + ": Вычисляю f(serial) * R^e mod n = '" + blinded_hash.to_str() + "' и посылаю это число банку.\n", this->color);
-        banknote B;
+
         B.sign = banking->signBanknote(this, nom, blinded_hash);
         if(B.sign != 0){
             B.nom = nom;
@@ -295,14 +332,12 @@ bool human::emitBanknote(N nom, N serial, N R)
                 say(name + ": Деньги потеряны, банкнота вышла с нулевой подписью, но зато теперь я знаю R - число, кратное делителю модуля ключевой пары!\n", color);
                 say(name + ": Посчитаю-ка я НОД R и N...\n", color);
             }//Из-за этого нюанса надо добавить Бобу проверку на нулевую подпись банкноты...
-            wallet[B.serial] = B;
-            return true;
         }
         else say(this->name + ": К сожалению, банк отказался подписывать мою банкноту.\n", this->color);
-    return false;
+    return B;
 }
 
-bool human::emitRandomBanknote(N nom)
+banknote human::emitRandomBanknote(N nom)
 {
     N nom_public_key_module = banking->getCurrencyMap()[nom].n;
     N serial = N::getRandomNumberLessThan(nom_public_key_module);
